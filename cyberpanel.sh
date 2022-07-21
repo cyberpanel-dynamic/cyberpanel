@@ -496,14 +496,6 @@ Check_Argument() {
 				shift
 					Branch_Check "${1}"
       				;;
-      				-rr | --raw-repo)
-      				shift
-        				Raw_Repo_check "${1}"
-      				;;
-      				-r | --repo)
-      				shift
-      					Repo_check "${1}"
-      				;;
       				-m | --minimal)
 	      				if ! echo "$@" | grep -q -i "postfix\|pureftpd\|powerdns" ; then
 						Postfix_Switch="Off"
