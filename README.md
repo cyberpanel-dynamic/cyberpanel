@@ -45,7 +45,7 @@ echo `
 export GIT_PROVIDER="github.com"
 export RAW_CONTENT="raw.githubusercontent.com"
 export BASE_REPO="cyberpanel-dynamic/cyberpanel"
-export BASE_REPO_THEMES="cyberpanel-dynamic/cyberpanel-themes"
+export BASE_REPO_THEMES="usmannasir/CyberPanel-Themes"
 export GIT_REPO="https://$GIT_PROVIDER/$BASE_REPO"
 export RAW_GIT_REPO="https://$RAW_CONTENT/$BASE_REPO"
 export GIT_THEMES_REPO="https://$GIT_PROVIDER/$BASE_REPO_THEMES"
