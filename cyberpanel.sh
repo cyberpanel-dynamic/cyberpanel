@@ -76,6 +76,8 @@ Branch_Name="v${Panel_Version}.${Panel_Build}"
 
 if [[ $Branch_Name = v*.*.* ]] ; then
 	echo -e  "\nBranch name fetched...$Branch_Name"
+elif [[ $Branch_Name = "stable" ]] ; then
+	echo -e "\nBranch name fetched....$Branch_Name"
 else
 	echo -e "\nUnable to fetch Branch name..."
 	echo -e "\nPlease try again in few moments, if this error still happens, please contact support"
