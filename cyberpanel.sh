@@ -70,14 +70,15 @@ Server_Provider='Undefined'
 Watchdog="On"
 Redis_Hosting="No"
 Temp_Value=$(curl --silent --max-time 30 -4 "$RAW_GIT_REPO/$BRANCH_NAME/version.txt")
-Panel_Version=${Temp_Value:12:3}
-Panel_Build=${Temp_Value:25:1}
+Panel_Version=$( echo $Temp_Value | jq -r '.version')
+Panel_Build=$( echo $Temp_value | jq -r '.build')
 
 Branch_Name="v${Panel_Version}.${Panel_Build}"
 
 if [[ $Branch_Name = v*.*.* ]] ; then
 	echo -e  "\nBranch name fetched...$Branch_Name"
-elif [[ $Branch_Name = "stable" ]] ; then
+elif [[ $Branch_Name = "vstable." ]] ; then
+	$Branch_Name = "stable"
 	echo -e "\nBranch name fetched....$Branch_Name"
 else
 	echo -e "\nUnable to fetch Branch name..."
