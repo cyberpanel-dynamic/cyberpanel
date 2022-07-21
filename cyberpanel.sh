@@ -74,7 +74,7 @@ Set_Default_Variables() {
 	Panel_Build=$( echo "$Temp_Value" | jq -r '.build // empty')
 	echo $Panel_Version
 	echo $Panel_Build
-	if [ ! -z "$Panel_Build" ]; then
+	if [ -z "$Panel_Build" ]; then
 		echo "Should be null?"
 		Branch_Name="${Panel_Version}"
 	else
