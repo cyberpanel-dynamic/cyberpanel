@@ -28,6 +28,9 @@ CloudLinux8 = 5
 openEuler20 = 6
 openEuler22 = 7
 
+GIT_CONTENT_URL = os.getenv("RAW_GIT_REPO")
+GIT_CLONE_URL = os.getenv("GIT_REPO")
+GIT_API_URL = os.getenv("GIT_API");
 
 class Upgrade:
     logPath = "/usr/local/lscp/logs/upgradeLog"
@@ -284,7 +287,7 @@ class Upgrade:
             except:
                 pass
 
-            command = 'wget -O /usr/local/CyberCP/public/phpmyadmin.zip https://github.com/usmannasir/cyberpanel/raw/stable/phpmyadmin.zip'
+            command = 'wget -O /usr/local/CyberCP/public/phpmyadmin.zip ' + GIT_CLONE_URL + '/raw/stable/phpmyadmin.zip'
             Upgrade.executioner(command, 0)
 
             command = 'unzip /usr/local/CyberCP/public/phpmyadmin.zip -d /usr/local/CyberCP/public/phpmyadmin'
@@ -1866,7 +1869,7 @@ autocreate_system_folders = On
 
                 os.chdir('/usr/local')
 
-                command = 'git clone https://github.com/usmannasir/cyberpanel'
+                command = 'git clone ' + GIT_CLONE_URL
                 if not Upgrade.executioner(command, command, 1):
                     return 0, 'Failed to execute %s' % (command)
 
@@ -2665,7 +2668,7 @@ vmail
             if os.path.exists('httpd_config.xml'):
                 os.remove('httpd_config.xml')
 
-            command = 'wget https://raw.githubusercontent.com/usmannasir/cyberpanel/stable/install/litespeed/httpd_config.xml'
+            command = 'wget '+ GIT_CONTENT_URL + '/stable/install/litespeed/httpd_config.xml'
             Upgrade.executioner(command, command, 0)
             # os.remove('/usr/local/lsws/conf/httpd_config.xml')
             # shutil.copy('httpd_config.xml', '/usr/local/lsws/conf/httpd_config.xml')

@@ -4,32 +4,35 @@
 export LC_CTYPE=en_US.UTF-8
 SUDO_TEST=$(set)
 BRANCH_NAME="stable"
-GIT_URL="github.com/usmannasir/cyberpanel"
-GIT_CONTENT_URL="raw.githubusercontent.com/usmannasir/cyberpanel"
+GIT_PROVIDER="github.com"
+RAW_CONTENT="raw.githubusercontent.com"
+BASE_REPO="cyberpanel-dynamic/cyberpanel"
+GIT_URL="https://$GIT_PROVIDER/$BASE_REPO"
+GIT_CONTENT_URL="https://$RAW_CONTENT/$BASE_REPO"
 
 check_OS() {
 	if [[ ! -f /etc/os-release ]] ; then
-	  echo -e "Unable to detect the operating system...\n"
-	  exit
+		echo -e "Unable to detect the operating system...\n"
+		exit
 	fi
 
 	if grep -q -E "CentOS Linux 7|CentOS Linux 8" /etc/os-release ; then
-	  Server_OS="CentOS"
+		Server_OS="CentOS"
 	elif grep -q "AlmaLinux-8" /etc/os-release ; then
-	  Server_OS="AlmaLinux"
+		Server_OS="AlmaLinux"
 	elif grep -q -E "CloudLinux 7|CloudLinux 8" /etc/os-release ; then
-	  Server_OS="CloudLinux"
+		Server_OS="CloudLinux"
 	elif grep -q -E "Ubuntu 18.04|Ubuntu 20.04|Ubuntu 20.10" /etc/os-release ; then
-	  Server_OS="Ubuntu"
+		Server_OS="Ubuntu"
 	elif grep -q -E "Rocky Linux" /etc/os-release ; then
-	  Server_OS="RockyLinux"
+		Server_OS="RockyLinux"
 	elif grep -q -E "openEuler 20.03|openEuler 22.03" /etc/os-release ; then
-	  Server_OS="openEuler"
+		Server_OS="openEuler"
 	else
-	  echo -e "Unable to detect your system..."
-	  echo -e "\nCyberPanel is supported on x86_64 based Ubuntu 18.04, Ubuntu 20.04, Ubuntu 20.10, Ubuntu 22.04, CentOS 7, CentOS 8, AlmaLinux 8, RockyLinux 8, CloudLinux 7, CloudLinux 8, openEuler 20.03, openEuler 22.03...\n"
-  	  Debug_Log2 "CyberPanel is supported on x86_64 based Ubuntu 18.04, Ubuntu 20.04, Ubuntu 20.10, Ubuntu 22.04, CentOS 7, CentOS 8, AlmaLinux 8, RockyLinux 8, CloudLinux 7, CloudLinux 8, openEuler 20.03, openEuler 22.03... [404]"
-	  exit
+		echo -e "Unable to detect your system..."
+		echo -e "\nCyberPanel is supported on x86_64 based Ubuntu 18.04, Ubuntu 20.04, Ubuntu 20.10, Ubuntu 22.04, CentOS 7, CentOS 8, AlmaLinux 8, RockyLinux 8, CloudLinux 7, CloudLinux 8, openEuler 20.03, openEuler 22.03...\n"
+  		Debug_Log2 "CyberPanel is supported on x86_64 based Ubuntu 18.04, Ubuntu 20.04, Ubuntu 20.10, Ubuntu 22.04, CentOS 7, CentOS 8, AlmaLinux 8, RockyLinux 8, CloudLinux 7, CloudLinux 8, openEuler 20.03, openEuler 22.03... [404]"
+		exit
 	fi
 
 	Server_OS_Version=$(grep VERSION_ID /etc/os-release | awk -F[=,] '{print $2}' | tr -d \" | head -c2 | tr -d . )
@@ -38,140 +41,139 @@ check_OS() {
 	echo -e "System: $Server_OS $Server_OS_Version detected...\n"
 
 	if [[ $Server_OS = "CloudLinux" ]] || [[ "$Server_OS" = "AlmaLinux" ]] || [[ "$Server_OS" = "RockyLinux" ]] ; then
-	  Server_OS="CentOS"
-  	  #CloudLinux gives version id like 7.8, 7.9, so cut it to show first number only
-  	  #treat CloudLinux, Rocky and Alma as CentOS
+		Server_OS="CentOS"
+  		#CloudLinux gives version id like 7.8, 7.9, so cut it to show first number only
+  		#treat CloudLinux, Rocky and Alma as CentOS
 	fi
 
 }
 
 set_watchdog() {
-echo -e "\nPlease choose:"
-echo -e "\n1. Install/Update WatchDog."
-echo -e "\n2. Start or Check WatchDog."
-echo -e "\n3. Kill WatchDog."
-echo -e "\n4. Back to Main Menu."
-echo -e "\n"
-printf "%s" "Please enter number [1-4]: "
-read TMP_YN
+	echo -e "\nPlease choose:"
+	echo -e "\n1. Install/Update WatchDog."
+	echo -e "\n2. Start or Check WatchDog."
+	echo -e "\n3. Kill WatchDog."
+	echo -e "\n4. Back to Main Menu."
+	echo -e "\n"
+	printf "%s" "Please enter number [1-4]: "
+	read TMP_YN
 
-if [[ $TMP_YN == "1" ]] ; then
-	if [[ -f /etc/cyberpanel/watchdog.sh ]] ; then
-		bash /etc/cyberpanel/watchdog.sh kill
-	fi
-		rm -f /etc/cyberpanel/watchdog.sh
-		rm -f /usr/local/bin/watchdog
-		wget -O /etc/cyberpanel/watchdog.sh https://$GIT_CONTENT_URL/$BRANCH_NAME/CPScripts/watchdog.sh
-		chmod 700 /etc/cyberpanel/watchdog.sh
-		ln -s /etc/cyberpanel/watchdog.sh /usr/local/bin/watchdog
-		echo -e "\nWatchDog has been installed/updated..."
-		watchdog status
-		set_watchdog
-elif [[ $TMP_YN == "2" ]] ; then
-	if [[ -f /etc/cyberpanel/watchdog.sh ]] ; then
-		watchdog status
-		exit
+	if [[ $TMP_YN == "1" ]] ; then
+		if [[ -f /etc/cyberpanel/watchdog.sh ]] ; then
+			bash /etc/cyberpanel/watchdog.sh kill
+		fi
+			rm -f /etc/cyberpanel/watchdog.sh
+			rm -f /usr/local/bin/watchdog
+			wget -O /etc/cyberpanel/watchdog.sh https://$GIT_CONTENT_URL/$BRANCH_NAME/CPScripts/watchdog.sh
+			chmod 700 /etc/cyberpanel/watchdog.sh
+			ln -s /etc/cyberpanel/watchdog.sh /usr/local/bin/watchdog
+			echo -e "\nWatchDog has been installed/updated..."
+			watchdog status
+			set_watchdog
+	elif [[ $TMP_YN == "2" ]] ; then
+		if [[ -f /etc/cyberpanel/watchdog.sh ]] ; then
+			watchdog status
+			exit
+		else
+			echo -e "\nYou don't have WatchDog installed, please install it first..."
+			set_watchdog
+		fi
+	elif [[ $TMP_YN == "3" ]] ; then
+		if [[ -f /etc/cyberpanel/watchdog.sh ]] ; then
+			echo -e "\n"
+			watchdog kill
+			exit
+		else
+			echo -e "\nYou don't have WatchDog installed, please install it first..."
+			set_watchdog
+		fi
+	elif [[ $TMP_YN == "4" ]] ; then
+		main_page
 	else
-		echo -e "\nYou don't have WatchDog installed, please install it first..."
-		set_watchdog
-	fi
-elif [[ $TMP_YN == "3" ]] ; then
-	if [[ -f /etc/cyberpanel/watchdog.sh ]] ; then
-		echo -e "\n"
-		watchdog kill
+		echo -e "\nPlease enter correct number..."
 		exit
-	else
-		echo -e "\nYou don't have WatchDog installed, please install it first..."
-		set_watchdog
 	fi
-elif [[ $TMP_YN == "4" ]] ; then
-	main_page
-else
-	echo -e "\nPlease enter correct number..."
-	exit
-fi
 }
 
 check_return() {
-#check previous command result , 0 = ok ,  non-0 = something wrong.
-if [[ $? -eq "0" ]] ; then
-	:
-else
-	echo -e "\ncommand failed, exiting..."
-	exit
-fi
+	#check previous command result , 0 = ok ,  non-0 = something wrong.
+	if [[ $? -eq "0" ]] ; then
+		:
+	else
+		echo -e "\ncommand failed, exiting..."
+		exit
+	fi
 }
 
 self_check() {
-echo -e "\nChecking Cyberpanel Utility update..."
-SUM=$(md5sum /usr/bin/cyberpanel_utility)
-SUM1=${SUM:0:32}
-#get md5sum of local file
+	echo -e "\nChecking Cyberpanel Utility update..."
+	SUM=$(md5sum /usr/bin/cyberpanel_utility)
+	SUM1=${SUM:0:32}
+	#get md5sum of local file
 
-rm -f /usr/local/CyberPanel/cyberpanel_utility.sh
-wget -q -O /usr/local/CyberPanel/cyberpanel_utility.sh https://cyberpanel.sh/misc/cyberpanel_utility.sh
-chmod 600 /usr/local/CyberPanel/cyberpanel_utility.sh
+	rm -f /usr/local/CyberPanel/cyberpanel_utility.sh
+	wget -q -O /usr/local/CyberPanel/cyberpanel_utility.sh $GIT_CONTENT_URL/misc/cyberpanel_utility.sh
+	chmod 600 /usr/local/CyberPanel/cyberpanel_utility.sh
 
+	SUM=$(md5sum /usr/local/CyberPanel/cyberpanel_utility.sh)
+	SUM2=${SUM:0:32}
+	#get md5sum of remote file.
 
-SUM=$(md5sum /usr/local/CyberPanel/cyberpanel_utility.sh)
-SUM2=${SUM:0:32}
-#get md5sum of remote file.
-
-if [[ $SUM1 == $SUM2 ]] ; then
-	echo -e "\nCyberPanel Utility Script is up to date...\n"
-else
-	local_string=$(head -2 /usr/bin/cyberpanel_utility)
-	remote_string=$(head -2 /usr/local/CyberPanel/cyberpanel_utility.sh)
-	#check file content before replacing itself in case failed to download the file.
-	if [[ $local_string == $remote_string ]] ; then
-	echo -e "\nUpdating CyberPanel Utility Script..."
-	rm -f /usr/bin/cyberpanel_utility
-	mv /usr/local/CyberPanel/cyberpanel_utility.sh /usr/bin/cyberpanel_utility
-	chmod 700 /usr/bin/cyberpanel_utility
-	echo -e "\nCyberPanel Utility update compelted..."
-	echo -e "\nPlease execute it again..."
-	exit
+	if [[ $SUM1 == $SUM2 ]] ; then
+		echo -e "\nCyberPanel Utility Script is up to date...\n"
 	else
-	echo -e "\nFailed to fetch server file..."
-	echo -e "\nKeep using local script..."
+		local_string=$(head -2 /usr/bin/cyberpanel_utility)
+		remote_string=$(head -2 /usr/local/CyberPanel/cyberpanel_utility.sh)
+		#check file content before replacing itself in case failed to download the file.
+		if [[ $local_string == $remote_string ]] ; then
+			echo -e "\nUpdating CyberPanel Utility Script..."
+			rm -f /usr/bin/cyberpanel_utility
+			mv /usr/local/CyberPanel/cyberpanel_utility.sh /usr/bin/cyberpanel_utility
+			chmod 700 /usr/bin/cyberpanel_utility
+			echo -e "\nCyberPanel Utility update completed..."
+			echo -e "\nPlease execute it again..."
+			exit
+		else
+			echo -e "\nFailed to fetch server file..."
+			echo -e "\nKeep using local script..."
+		fi
 	fi
-fi
 
-rm -f /usr/local/CyberPanel/cyberpanel_utility.sh
+	rm -f /usr/local/CyberPanel/cyberpanel_utility.sh
 
 }
 
 cyberpanel_upgrade() {
-SERVER_COUNTRY="unknow"
-SERVER_COUNTRY=$(curl --silent --max-time 5 https://cyberpanel.sh/?country)
-if [[ ${#SERVER_COUNTRY} == "2" ]] || [[ ${#SERVER_COUNTRY} == "6" ]] ; then
-	echo -e "\nChecking server..."
-else
-	echo -e "\nChecking server..."
 	SERVER_COUNTRY="unknow"
-fi
+	SERVER_COUNTRY=$(curl --silent --max-time 5 https://cyberpanel.sh/?country)
+	if [[ ${#SERVER_COUNTRY} == "2" ]] || [[ ${#SERVER_COUNTRY} == "6" ]] ; then
+		echo -e "\nChecking server..."
+	else
+		echo -e "\nChecking server..."
+		SERVER_COUNTRY="unknow"
+	fi
 
-if [[ $SERVER_COUNTRY == "CN" ]] ; then
-	GIT_URL="gitee.com/qtwrk/cyberpanel"
-	GIT_CONTENT_URL="gitee.com/qtwrk/cyberpanel/raw"
-fi
+	if [[ $SERVER_COUNTRY == "CN" ]] ; then
+		GIT_URL="gitee.com/qtwrk/cyberpanel"
+		GIT_CONTENT_URL="gitee.com/qtwrk/cyberpanel/raw"
+	fi
 
-#echo -e "CyberPanel Upgrade will start in 10 seconds"
-#echo -e "If you want to cancel, please press CTRL + C to cancel it"
-#sleep 10
-echo -e "CyberPanel upgrading..."
-rm -f /usr/local/cyberpanel_upgrade.sh
-wget -O /usr/local/cyberpanel_upgrade.sh -q https://$GIT_CONTENT_URL/${BRANCH_NAME}/cyberpanel_upgrade.sh
-chmod 700 /usr/local/cyberpanel_upgrade.sh
-/usr/local/cyberpanel_upgrade.sh
-rm -f /usr/local/cyberpanel_upgrade.sh
-exit
+	#echo -e "CyberPanel Upgrade will start in 10 seconds"
+	#echo -e "If you want to cancel, please press CTRL + C to cancel it"
+	#sleep 10
+	echo -e "CyberPanel upgrading..."
+	rm -f /usr/local/cyberpanel_upgrade.sh
+	wget -O /usr/local/cyberpanel_upgrade.sh -q https://$GIT_CONTENT_URL/${BRANCH_NAME}/cyberpanel_upgrade.sh
+	chmod 700 /usr/local/cyberpanel_upgrade.sh
+	/usr/local/cyberpanel_upgrade.sh
+	rm -f /usr/local/cyberpanel_upgrade.sh
+	exit
 }
 
 show_help() {
-echo -e "\nFetching information...\n"
-curl --silent https://cyberpanel.sh/misc/faq.sh | sudo -u nobody bash | less -r
-exit
+	echo -e "\nFetching information...\n"
+	curl --silent $GIT_CONTENT_URL/faq.sh | sudo -u nobody bash | less -r
+	exit
 }
 
 addons() {
@@ -272,21 +274,21 @@ install_redis() {
 	fi
 
 	if systemctl is-active --quiet redis ; then
-	systemctl status redis
+		systemctl status redis
 	else
-	systemctl enable redis
-	systemctl start redis
-	systemctl status redis
+		systemctl enable redis
+		systemctl start redis
+		systemctl status redis
 	fi
 }
 
 install_memcached() {
-echo -e "\n Would you like to install Memcached or LiteSpeed Mmecached ?"
-echo -e "\n 1. LiteSpeed Memcached"
-echo -e "\n 2. Memcached"
-echo -e "\n 3. Back to Main Menu\n"
-printf "%s" "Please enter number [1-3]: "
-read TMP_YN
+	echo -e "\n Would you like to install Memcached or LiteSpeed Mmecached ?"
+	echo -e "\n 1. LiteSpeed Memcached"
+	echo -e "\n 2. Memcached"
+	echo -e "\n 3. Back to Main Menu\n"
+	printf "%s" "Please enter number [1-3]: "
+	read TMP_YN
 
 	if [[ $TMP_YN == "1" ]] ; then
 		if systemctl is-active --quiet memcached ; then
@@ -314,11 +316,11 @@ read TMP_YN
 				cd $DIR
 		fi
 		if systemctl is-active --quiet lsmcd ; then
-		systemctl status lsmcd
+			systemctl status lsmcd
 		else
-		systemctl enable lsmcd
-		systemctl start lsmcd
-		systemctl status lsmcd
+			systemctl enable lsmcd
+			systemctl start lsmcd
+			systemctl status lsmcd
 		fi
 
 	elif [[ $TMP_YN == "2" ]] ; then
@@ -328,53 +330,53 @@ read TMP_YN
 			exit
 		fi
 		if [[ -f /usr/bin/memcached ]] ; then
-		echo -e "\nMemcached is already installed..."
+			echo -e "\nMemcached is already installed..."
 		fi
 		if [[ ! -f /usr/bin/memcached ]] && [[ $SERVER_OS == "CentOS" ]] ; then
-		  yum install memcached -y
-		  sed -i 's|OPTIONS=""|OPTIONS="-l 127.0.0.1 -U 0"|g' /etc/sysconfig/memcached
-		  #this will disbale UDP and bind to 127.0.0.1 to prevent UDP amplification attack
+		  	yum install memcached -y
+		  	sed -i 's|OPTIONS=""|OPTIONS="-l 127.0.0.1 -U 0"|g' /etc/sysconfig/memcached
+		  	#this will disbale UDP and bind to 127.0.0.1 to prevent UDP amplification attack
 		fi
 		if [[ ! -f /usr/bin/memcached ]] && [[ $SERVER_OS == "Ubuntu" ]] ; then
-		  DEBIAN_FRONTEND=noninteractive apt install memcached -y
+		  	DEBIAN_FRONTEND=noninteractive apt install memcached -y
 		fi
 		if [[ ! -f /usr/bin/memcached ]] && [[ $SERVER_OS == "openEuler" ]] ; then
-		  yum install memcached -y
-		  sed -i 's|OPTIONS=""|OPTIONS="-l 127.0.0.1 -U 0"|g' /etc/sysconfig/memcached
-		  #this will disbale UDP and bind to 127.0.0.1 to prevent UDP amplification attack
+		  	yum install memcached -y
+		  	sed -i 's|OPTIONS=""|OPTIONS="-l 127.0.0.1 -U 0"|g' /etc/sysconfig/memcached
+		  	#this will disbale UDP and bind to 127.0.0.1 to prevent UDP amplification attack
 		fi
 		if systemctl is-active --quiet memcached ; then
-		systemctl status memcached
+			systemctl status memcached
 		else
-		systemctl enable memcached
-		systemctl start memcached
-		systemctl status memcached
+			systemctl enable memcached
+			systemctl start memcached
+			systemctl status memcached
 		fi
 	elif [[ $TMP_YN == "3" ]] ; then
-	main_page
+		main_page
 	else
-	echo -e "  Please enter the right number [1-3]\n"
-	exit
+		echo -e "  Please enter the right number [1-3]\n"
+		exit
 	fi
 }
 
 install_php_memcached() {
 	if [[ $SERVER_OS == "CentOS" ]] ; then
-	yum install -y lsphp74-memcached lsphp73-memcached lsphp72-memcached lsphp71-memcached lsphp70-memcached lsphp56-pecl-memcached lsphp55-pecl-memcached lsphp54-pecl-memcached
+		yum install -y lsphp74-memcached lsphp73-memcached lsphp72-memcached lsphp71-memcached lsphp70-memcached lsphp56-pecl-memcached lsphp55-pecl-memcached lsphp54-pecl-memcached
 	fi
 	if [[ $SERVER_OS == "Ubuntu" ]] ; then
-	DEBIAN_FRONTEND=noninteractive apt install -y lsphp74-memcached lsphp73-memcached lsphp72-memcached lsphp71-memcached lsphp70-memcached
+		DEBIAN_FRONTEND=noninteractive apt install -y lsphp74-memcached lsphp73-memcached lsphp72-memcached lsphp71-memcached lsphp70-memcached
 	fi
 	if [[ $SERVER_OS == "openEuler" ]] ; then
-	echo " "
-	#yum install -y lsphp74-memcached lsphp73-memcached lsphp72-memcached lsphp71-memcached
+		echo " "
+		#yum install -y lsphp74-memcached lsphp73-memcached lsphp72-memcached lsphp71-memcached
 	fi
 	echo -e "\nMemcached extension for PHP has been installed..."
 	exit
 }
 
 main_page() {
-echo -e "		CyberPanel Utility Tools \e[31m(beta)\e[39m
+	echo -e "		CyberPanel Utility Tools \e[31m(beta)\e[39m
 
   1. Upgrade CyberPanel.
 
@@ -387,37 +389,37 @@ echo -e "		CyberPanel Utility Tools \e[31m(beta)\e[39m
   5. Exit.
 
   "
-read -p "  Please enter the number[1-5]: " num
-echo ""
-case "$num" in
-	1)
-	cyberpanel_upgrade
-	;;
-	2)
-	addons
-	;;
-	3)
-	set_watchdog
-	;;
-	4)
-	show_help
-	;;
-	5)
-	exit
-	;;
-	*)
-	echo -e "  Please enter the right number [1-5]\n"
-	exit
-	;;
-esac
+	read -p "  Please enter the number[1-5]: " num
+	echo ""
+	case "$num" in
+		1)
+			cyberpanel_upgrade
+		;;
+		2)
+			addons
+		;;
+		3)
+			set_watchdog
+		;;
+		4)
+			show_help
+		;;
+		5)
+			exit
+		;;
+		*)
+			echo -e "  Please enter the right number [1-5]\n"
+			exit
+		;;
+	esac
 }
 
 panel_check(){
-if [[ ! -f /etc/cyberpanel/machineIP ]] ; then
-	echo -e "\nCan not detect CyberPanel..."
-	echo -e "\nExit..."
-	exit
-fi
+	if [[ ! -f /etc/cyberpanel/machineIP ]] ; then
+		echo -e "\nCan not detect CyberPanel..."
+		echo -e "\nExit..."
+		exit
+	fi
 }
 
 sudo_check() {
@@ -446,7 +448,7 @@ self_check
 check_OS
 
 if [ $# -eq 0 ] ; then
-main_page
+	main_page
 else
 	if [[ $1 == "upgrade" ]] || [[ $1 == "-u" ]] || [[ $1 == "--update" ]] || [[ $1 == "--upgrade" ]] || [[ $1 == "update" ]]; then
 		cyberpanel_upgrade
@@ -455,6 +457,6 @@ else
 		show_help
 		exit
 	fi
-echo -e "\nUnrecognized argument..."
-exit
+	echo -e "\nUnrecognized argument..."
+	exit
 fi

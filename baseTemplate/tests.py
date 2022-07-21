@@ -1,11 +1,14 @@
 import requests
 import json
+import os
 
-
+GIT_CONTENT_URL = os.getenv("RAW_GIT_REPO")
+GIT_CLONE_URL = os.getenv("GIT_REPO")
+GIT_API_URL = os.getenv("GIT_API");
 
 ab = {'package': 'helo world', 'Themename': 'blue-green-theme'}
 
-url= "http://cyberpanel.net/version.txt"
+url=  GIT_CONTENT_URL + "/version.txt"
 #url= "https://api.github.com/repos/usmannasir/CyberPanel-Themes/git/commits/def351a6eb4c103fb2dd2acf52396d4ef6111eee"
 
 
@@ -16,7 +19,7 @@ a= res.json()['version']
 print(a)
 print(res)
 
-u = "https://api.github.com/repos/usmannasir/cyberpanel/commits?sha=v%s"%a
+u = GIT_API_URL + "/commits?sha=v%s"%a
 r= requests.get(u)
 
 print(r.text)

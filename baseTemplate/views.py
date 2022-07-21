@@ -21,6 +21,11 @@ from plogical.httpProc import httpProc
 VERSION = '2.3'
 BUILD = 2
 
+GIT_CONTENT_URL = os.getenv("RAW_GIT_REPO")
+GIT_CLONE_URL = os.getenv("GIT_REPO")
+GIT_API_URL = os.getenv("GIT_API")
+GIT_API_THEMES_URL = os.getenv("GIT_API_THEMES")
+GIT_CONTENT_THEMES_URL = os.getenv("RAW_GIT_THEMES_REPO")
 
 @ensure_csrf_cookie
 def renderBase(request):
@@ -100,7 +105,7 @@ def getLoadAverage(request):
 def versionManagment(request):
     ## Get latest version
 
-    getVersion = requests.get('https://cyberpanel.net/version.txt')
+    getVersion = requests.get(GIT_CONTENT_URL + '/version.txt')
     latest = getVersion.json()
     latestVersion = latest['version']
     latestBuild = latest['build']
@@ -110,7 +115,7 @@ def versionManagment(request):
     currentVersion = VERSION
     currentBuild = str(BUILD)
 
-    u = "https://api.github.com/repos/usmannasir/cyberpanel/commits?sha=v%s.%s" % (latestVersion, latestBuild)
+    u = GIT_API_URL + "/commits?sha=v%s.%s" % (latestVersion, latestBuild)
     logging.CyberCPLogFileWriter.writeToFile(u)
     r = requests.get(u)
     latestcomit = r.json()[0]['sha']
@@ -266,13 +271,13 @@ def design(request):
 
     ####### Fetch sha...
 
-    sha_url = "https://api.github.com/repos/usmannasir/CyberPanel-Themes/commits"
+    sha_url = GIT_API_THEMES_URL + "/commits"
 
     sha_res = requests.get(sha_url)
 
     sha = sha_res.json()[0]['sha']
 
-    l = "https://api.github.com/repos/usmannasir/CyberPanel-Themes/git/trees/%s" % sha
+    l = GIT_API_THEMES_URL + "/git/trees/%s" % sha
     fres = requests.get(l)
     tott = len(fres.json()['tree'])
     finalData['tree'] = []
@@ -300,7 +305,7 @@ def getthemedata(request):
 
         #logging.CyberCPLogFileWriter.writeToFile(str(data) + "  [themedata]")
 
-        url = "https://raw.githubusercontent.com/usmannasir/CyberPanel-Themes/main/%s/design.css" % data['Themename']
+        url = GIT_CONTENT_THEMES_URL + "/main/%s/design.css" % data['Themename']
 
         res = requests.get(url)
 

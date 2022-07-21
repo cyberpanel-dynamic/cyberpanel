@@ -17,6 +17,9 @@ import stat
 VERSION = '2.3'
 BUILD = 2
 
+GIT_CONTENT_URL = os.getenv("RAW_GIT_REPO")
+GIT_CLONE_URL = os.getenv("GIT_REPO")
+
 char_set = {'small': 'abcdefghijklmnopqrstuvwxyz', 'nums': '0123456789', 'big': 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'}
 
 
@@ -379,7 +382,7 @@ class preFlightsChecks:
 
         os.chdir('/usr/local')
 
-        command = "git clone https://github.com/usmannasir/cyberpanel"
+        command = "git clone " + GIT_CLONE_URL
         preFlightsChecks.call(command, self.distro, command, command, 1, 1, os.EX_OSERR)
 
         shutil.move('cyberpanel', 'CyberCP')
@@ -724,7 +727,7 @@ password="%s"
             if not os.path.exists("/usr/local/CyberCP/public"):
                 os.mkdir("/usr/local/CyberCP/public")
 
-            command = 'wget -O /usr/local/CyberCP/public/phpmyadmin.zip https://github.com/usmannasir/cyberpanel/raw/stable/phpmyadmin.zip'
+            command = 'wget -O /usr/local/CyberCP/public/phpmyadmin.zip ' + GIT_CLONE_URL + '/raw/stable/phpmyadmin.zip'
 
             preFlightsChecks.call(command, self.distro, '[download_install_phpmyadmin]',
                                   command, 1, 0, os.EX_OSERR)
