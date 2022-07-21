@@ -109,7 +109,7 @@ start_install_script() {
 	rm -f install.tar.gz
 	curl --silent -o cyberpanel.sh "$RAW_GIT_REPO/$BRANCH_NAME/cyberpanel.sh"
 	chmod +x cyberpanel.sh
-	./cyberpanel.sh --raw-repo $RAW_GIT_REPO --repo $GIT_REPO  $@
+	./cyberpanel.sh $@
 }
 
 check_valid_os
