@@ -116,10 +116,6 @@ Debug_Log2() {
 	curl --max-time 20 -d '{"ipAddress": "'"$Server_IP"'", "InstallCyberPanelStatus": "'"$1"'"}' -H "Content-Type: application/json" -X POST https://cloud.cyberpanel.net/servers/RecvData  >/dev/null 2>&1
 }
 
-Repo_Check() {
-
-}
-
 Branch_Check() {
 	if [[ "$1" = *.*.* ]]; then
 		#check input if it's valid format as X.Y.Z
