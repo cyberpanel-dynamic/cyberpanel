@@ -40,6 +40,7 @@
 #Post_Install_Tweak() --->  some patches/fixes on certain systems
 #Post_Install_Display_Final_Info() ---> display installation successful information.
 
+. /etc/profile.d/cyberpanel_env.sh
 
 Sudo_Test=$(set)
 #for SUDO check
