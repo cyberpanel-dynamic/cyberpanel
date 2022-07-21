@@ -71,7 +71,7 @@ Watchdog="On"
 Redis_Hosting="No"
 Temp_Value=$(curl --silent --max-time 30 -4 "$RAW_GIT_REPO/$BRANCH_NAME/version.txt")
 Panel_Version=$( echo $Temp_Value | jq -r '.version')
-Panel_Build=$( echo $Temp_value | jq -r '.build')
+Panel_Build=$( echo $Temp_Value | jq -r '.build')
 
 Branch_Name="v${Panel_Version}.${Panel_Build}"
 
