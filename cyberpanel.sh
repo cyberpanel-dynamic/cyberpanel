@@ -72,16 +72,24 @@ Set_Default_Variables() {
 	Temp_Value=$(curl --silent --max-time 30 -4 "$RAW_GIT_REPO/$BRANCH_NAME/version.txt")
 	Panel_Version=$( echo "$Temp_Value" | jq -r '.version')
 	Panel_Build=$( echo "$Temp_Value" | jq -r '.build')
+	echo $Panel_Version
+	echo $Panel_Build
 	if [ -z "$Panel_Build" ]; then
+		echo "Should be null?"
 		Branch_Name="${Panel_Version}"
 	else
+		echo "Build number exists..."
 		Branch_Name="v${Panel_Version}.${Panel_Build}"
 	fi
+	echo $Branch_Name
 	if [[ $Branch_Name = v*.*.* ]] ; then
+		echo $Branch_Name
 		echo -e  "\nBranch name fetched...$Branch_Name"
 	elif [[ $Branch_Name = "stable" ]] ; then
+		echo $Branch_Name
 		echo -e "\nBranch name fetched....$Branch_Name"
 	else
+		echo $Branch_Name
 		echo -e "\nUnable to fetch Branch name..."
 		echo -e "\nPlease try again in few moments, if this error still happens, please contact support"
 		exit
