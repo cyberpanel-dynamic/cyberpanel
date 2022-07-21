@@ -60,7 +60,7 @@ The values you can change are: GIT_PROVIDER, RAW_CONTENT, BASE_REPO, BASE_REPO_T
 After commiting your changes to the install.sh script, run this command (Replace cyberpanel-dynamic/cyberpanel to your git repo):
 
 ```
-sh <(curl https://raw.githubusercontent.com/cyberpanel-dynamic/cyberpanel/install.sh || wget -O - https://raw.githubusercontent.com/cyberpanel-dynamic/cyberpanel/install.sh)
+sh <(curl https://raw.githubusercontent.com/cyberpanel-dynamic/cyberpanel/stable/install.sh || wget -O - https://raw.githubusercontent.com/cyberpanel-dynamic/cyberpanel/stable/install.sh)
 ```
 
 # Upgrading CyberPanel
