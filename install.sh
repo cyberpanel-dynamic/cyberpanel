@@ -118,6 +118,8 @@ branch_check() {
 	  	echo -e "\nPlease input a valid format version number."
 	  	exit
 	fi
+
+	echo $BRANCH_NAME >> /etc/profile.d/cyberpanel_env.sh
 }
 
 start_install_script() {

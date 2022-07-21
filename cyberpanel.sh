@@ -47,66 +47,66 @@ Sudo_Test=$(set)
 
 Set_Default_Variables() {
 
-echo -e "Fetching latest data from CyberPanel server...\n"
-echo -e "This may take few seconds..."
+	echo -e "Fetching latest data from CyberPanel server...\n"
+	echo -e "This may take few seconds..."
 
-Silent="Off"
-Server_Edition="OLS"
-Admin_Pass="1234567"
+	Silent="Off"
+	Server_Edition="OLS"
+	Admin_Pass="1234567"
 
-Memcached="Off"
-Redis="Off"
+	Memcached="Off"
+	Redis="Off"
 
-Postfix_Switch="On"
-PowerDNS_Switch="On"
-PureFTPd_Switch="On"
+	Postfix_Switch="On"
+	PowerDNS_Switch="On"
+	PureFTPd_Switch="On"
 
-Server_IP=""
-Server_Country="Unknow"
-Server_OS=""
-Server_OS_Version=""
-Server_Provider='Undefined'
+	Server_IP=""
+	Server_Country="Unknow"
+	Server_OS=""
+	Server_OS_Version=""
+	Server_Provider='Undefined'
 
-Watchdog="On"
-Redis_Hosting="No"
-Temp_Value=$(curl --silent --max-time 30 -4 "$RAW_GIT_REPO/$BRANCH_NAME/version.txt")
-Panel_Version=$( echo $Temp_Value | jq -r '.version')
-Panel_Build=$( echo $Temp_Value | jq -r '.build')
+	Watchdog="On"
+	Redis_Hosting="No"
+	Temp_Value=$(curl --silent --max-time 30 -4 "$RAW_GIT_REPO/$BRANCH_NAME/version.txt")
+	Panel_Version=$( echo "$Temp_Value" | jq -r '.version')
+	Panel_Build=$( echo "$Temp_Value" | jq -r '.build')
 
-Branch_Name="v${Panel_Version}.${Panel_Build}"
+	Branch_Name="v${Panel_Version}.${Panel_Build}"
 
-if [[ $Branch_Name = v*.*.* ]] ; then
-	echo -e  "\nBranch name fetched...$Branch_Name"
-elif [[ $Branch_Name = "vstable." ]] ; then
-	Branch_Name="stable"
-	echo -e "\nBranch name fetched....$Branch_Name"
-else
-	echo -e "\nUnable to fetch Branch name..."
-	echo -e "\nPlease try again in few moments, if this error still happens, please contact support"
-	exit
-fi
+	if [[ $Branch_Name = v*.*.* ]] ; then
+		echo -e  "\nBranch name fetched...$Branch_Name"
+	elif [[ $Branch_Name = "vstable." ]] ; then
+		Branch_Name="stable"
+		echo -e "\nBranch name fetched....$Branch_Name"
+	else
+		echo -e "\nUnable to fetch Branch name..."
+		echo -e "\nPlease try again in few moments, if this error still happens, please contact support"
+		exit
+	fi
 
-Base_Number="1.9.3"
+	Base_Number="1.9.3"
 
-Total_RAM=$(free -m | awk '/Mem:/ { print $2 }')
+	Total_RAM=$(free -m | awk '/Mem:/ { print $2 }')
 
-Remote_MySQL="Off"
+	Remote_MySQL="Off"
 
-Final_Flags=()
+	Final_Flags=()
 
-Git_User=""
-Git_Content_URL=""
-Git_Clone_URL=""
+	Git_User=""
+	Git_Content_URL=""
+	Git_Clone_URL=""
 
-LSWS_Latest_URL="https://cyberpanel.sh/update.litespeedtech.com/ws/latest.php"
-LSWS_Tmp=$(curl --silent --max-time 30 -4 "$LSWS_Latest_URL")
-LSWS_Stable_Line=$(echo "$LSWS_Tmp" | grep "LSWS_STABLE")
-LSWS_Stable_Version=$(expr "$LSWS_Stable_Line" : '.*LSWS_STABLE=\(.*\) BUILD .*')
-#grab the LSWS latest stable version.
+	LSWS_Latest_URL="https://cyberpanel.sh/update.litespeedtech.com/ws/latest.php"
+	LSWS_Tmp=$(curl --silent --max-time 30 -4 "$LSWS_Latest_URL")
+	LSWS_Stable_Line=$(echo "$LSWS_Tmp" | grep "LSWS_STABLE")
+	LSWS_Stable_Version=$(expr "$LSWS_Stable_Line" : '.*LSWS_STABLE=\(.*\) BUILD .*')
+	#grab the LSWS latest stable version.
 
-Enterprise_Flag=""
-License_Key=""
-Debug_Log2 "Starting installation..,1"
+	Enterprise_Flag=""
+	License_Key=""
+	Debug_Log2 "Starting installation..,1"
 
 }
 
