@@ -1191,18 +1191,19 @@ Pre_Install_System_Tweak() {
     		if [[ $Total_SWAP -gt $Total_RAM ]] || [[ $Total_SWAP -eq $Total_RAM ]]; then
       			echo -e "Check SWAP...\n"
     		else
-      		if [[ $Set_SWAP -gt "2049" ]]; then
-        		#limit it to 2GB as max size
-        		Set_SWAP="2048"
-      		fi
-      		fallocate --length ${Set_SWAP}MiB $SWAP_File
-      		chmod 600 $SWAP_File
-      		mkswap $SWAP_File
-      		swapon $SWAP_File
-      		echo -e "${SWAP_File} swap swap sw 0 0" | sudo tee -a /etc/fstab
-      		sysctl vm.swappiness=10
-      		echo -e "vm.swappiness = 10" >> /etc/sysctl.conf
-      		echo -e "\nSWAP set...\n"
+      			if [[ $Set_SWAP -gt "2049" ]]; then
+        			#limit it to 2GB as max size
+        			Set_SWAP="2048"
+      			fi
+      			fallocate --length ${Set_SWAP}MiB $SWAP_File
+      			chmod 600 $SWAP_File
+      			mkswap $SWAP_File
+      			swapon $SWAP_File
+      			echo -e "${SWAP_File} swap swap sw 0 0" | sudo tee -a /etc/fstab
+      			sysctl vm.swappiness=10
+      			echo -e "vm.swappiness = 10" >> /etc/sysctl.conf
+      			echo -e "\nSWAP set...\n"
+		fi
     	fi
   
   	if [[ "$Server_Provider" = "Tencent Cloud" ]] ; then
