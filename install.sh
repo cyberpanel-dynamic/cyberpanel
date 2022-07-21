@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 rm -f /etc/profile.d/cyberpanel_env.sh
 
 echo `
