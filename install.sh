@@ -19,10 +19,6 @@ DEFAULT_BRANCH="stable"
 #Don't change this, it's meant for user input branch validation check (pattern)
 BRANCH_CHECK="1.9.3"
 
-check_valid_os
-choose_branch
-start_install_script
-
 check_valid_os() {
 	OUTPUT=$(cat /etc/*release)
 	if  echo $OUTPUT | grep -q "CentOS Linux 7" ; then
@@ -115,3 +111,7 @@ start_install_script() {
 	chmod +x cyberpanel.sh
 	./cyberpanel.sh --raw-repo $RAW_GIT_REPO --repo $GIT_REPO  $@
 }
+
+check_valid_os
+choose_branch
+start_install_script
