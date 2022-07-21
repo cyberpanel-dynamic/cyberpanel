@@ -94,7 +94,9 @@ choose_branch() {
 	else
 		branch_check "$TMP_BRANCH"
 	fi
-	echo 'export BRANCH_NAME="${BRANCH_NAME}"' >> /etc/profile.d/cyberpanel_env.sh
+	cat << EOF >> /etc/profile.d/cyberpanel_env.sh
+export BRANCH_NAME="${BRANCH_NAME}"
+EOF
 }
 
 branch_check() {
