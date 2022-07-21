@@ -72,15 +72,14 @@ Set_Default_Variables() {
 	Temp_Value=$(curl --silent --max-time 30 -4 "$RAW_GIT_REPO/$BRANCH_NAME/version.txt")
 	Panel_Version=$( echo "$Temp_Value" | jq -r '.version')
 	Panel_Build=$( echo "$Temp_Value" | jq -r '.build')
-	echo $Temp_Value
-	echo $Panel_Version
-	Branch_Name="v${Panel_Version}.${Panel_Build}"
-	echo $Branch_Name
-	echo "$RAW_GIT_REPO/$BRANCH_NAME/version.txt"
+	if [ -z "$Panel_Build" ]; then
+		Branch_Name="${Panel_Version}"
+	else
+		Branch_Name="v${Panel_Version}.${Panel_Build}"
+	fi
 	if [[ $Branch_Name = v*.*.* ]] ; then
 		echo -e  "\nBranch name fetched...$Branch_Name"
-	elif [[ $Branch_Name = "vstable." ]] ; then
-		Branch_Name="stable"
+	elif [[ $Branch_Name = "stable" ]] ; then
 		echo -e "\nBranch name fetched....$Branch_Name"
 	else
 		echo -e "\nUnable to fetch Branch name..."
