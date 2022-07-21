@@ -98,6 +98,9 @@ branch_check() {
 	    		BRANCH_NAME="v${1//[[:space:]]/}"
 	    		echo -e "\nSet branch name to $BRANCH_NAME..."
 	  	fi
+	elif [[ "$1" = "stable" ]]; then
+		BRANCH_NAME="stable"
+		echo -e "\nSet branch name to $BRANCH_NAME..."
 	else
 	  	echo -e "\nPlease input a valid format version number."
 	  	exit
