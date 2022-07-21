@@ -14,6 +14,8 @@ export GIT_API="https://api.$GIT_PROVIDER/repos/$BASE_REPO"
 export GIT_API_THEMES="https://api.$GIT_PROVIDER/repos/$BASE_REPO_THEMES"
 EOF
 
+. /etc/profile.d/cynerpanel_env.sh
+
 DEFAULT_BRANCH="stable"
 
 #Don't change this, it's meant for user input branch validation check (pattern)
