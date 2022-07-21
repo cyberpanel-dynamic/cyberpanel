@@ -70,11 +70,11 @@ Set_Default_Variables() {
 	Watchdog="On"
 	Redis_Hosting="No"
 	Temp_Value=$(curl --silent --max-time 30 -4 "$RAW_GIT_REPO/$BRANCH_NAME/version.txt")
-	Panel_Version=$( echo "$Temp_Value" | jq -r '.version')
-	Panel_Build=$( echo "$Temp_Value" | jq -r '.build')
+	Panel_Version=$( echo "$Temp_Value" | jq -r '.version // empty')
+	Panel_Build=$( echo "$Temp_Value" | jq -r '.build // empty')
 	echo $Panel_Version
 	echo $Panel_Build
-	if [ -z "$Panel_Build" ]; then
+	if [ ! -z "$Panel_Build" ]; then
 		echo "Should be null?"
 		Branch_Name="${Panel_Version}"
 	else
