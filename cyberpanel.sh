@@ -68,7 +68,7 @@ Server_Provider='Undefined'
 
 Watchdog="On"
 Redis_Hosting="No"
-Temp_Value=$(curl --silent --max-time 30 -4 $RAW_GIT_REPO/$BRANCH_NAME/version.txt)
+Temp_Value=$(curl --silent --max-time 30 -4 "$RAW_GIT_REPO/$BRANCH_NAME/version.txt")
 Panel_Version=${Temp_Value:12:3}
 Panel_Build=${Temp_Value:25:1}
 
@@ -1383,7 +1383,7 @@ Main_Installation() {
   		Enterprise_Flag="--ent ent --serial "
 	fi
 
-	sed -i "s|git clone $Git_clone_url |echo downloaded|" install.py
+	sed -i "s|git clone $Git_Clone_URL |echo downloaded|" install.py
 	sed -i "s|$Git_Content_URL|cyberpanel.sh|g" install.py
 
 
@@ -1681,7 +1681,7 @@ nohup watchdog mariadb > /dev/null 2>&1 &" >>/etc/rc.local
 
 Post_Install_Setup_Utility() {
 	if [[ ! -f /usr/bin/cyberpanel_utility ]]; then
-  		wget -q -O /usr/bin/cyberpanel_utility $Git_Content_URL/cyberpanel_utility.sh
+  		wget -q -O /usr/bin/cyberpanel_utility "$Git_Content_URL/cyberpanel_utility.sh"
   		chmod 700 /usr/bin/cyberpanel_utility
 	fi
 }
