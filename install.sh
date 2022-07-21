@@ -1,17 +1,28 @@
 #!/bin/bash
 rm -f /etc/profile.d/cyberpanel_env.sh
 
-cat << EOF > /etc/profile.d/cyberpanel_env.sh
 export GIT_PROVIDER="github.com"
 export RAW_CONTENT="raw.githubusercontent.com"
 export BASE_REPO="cyberpanel-dynamic/cyberpanel"
 export BASE_REPO_THEMES="usmannasir/CyberPanel-Themes"
-export GIT_REPO="https://$GIT_PROVIDER/$BASE_REPO"
-export RAW_GIT_REPO="https://$RAW_CONTENT/$BASE_REPO"
-export GIT_THEMES_REPO="https://$GIT_PROVIDER/$BASE_REPO_THEMES"
-export RAW_GIT_THEMES_REPO="https://$RAW_CONTENT/$BASE_REPO_THEMES"
-export GIT_API="https://api.$GIT_PROVIDER/repos/$BASE_REPO"
-export GIT_API_THEMES="https://api.$GIT_PROVIDER/repos/$BASE_REPO_THEMES"
+export GIT_REPO="https://${GIT_PROVIDER}/${BASE_REPO}"
+export RAW_GIT_REPO="https://${RAW_CONTENT}/${BASE_REPO}"
+export GIT_THEMES_REPO="https://${GIT_PROVIDER}/${BASE_REPO_THEMES}"
+export RAW_GIT_THEMES_REPO="https://${RAW_CONTENT}/${BASE_REPO_THEMES}"
+export GIT_API="https://api.${GIT_PROVIDER}/repos/${BASE_REPO}"
+export GIT_API_THEMES="https://api.${GIT_PROVIDER}/repos/${BASE_REPO_THEMES}"
+
+cat << EOF > /etc/profile.d/cyberpanel_env.sh
+export GIT_PROVIDER="${GIT_PROVIDER}"
+export RAW_CONTENT="${RAW_CONTENT}"
+export BASE_REPO="${BASE_REPO}"
+export BASE_REPO_THEMES="${BASE_REPO_THEMES}"
+export GIT_REPO="${GIT_REPO}"
+export RAW_GIT_REPO="${RAW_GIT_REPO}"
+export GIT_THEMES_REPO="${GIT_THEMES_REPO}"
+export RAW_GIT_THEMES_REPO="${RAW_GIT_THEMES_REPO}"
+export GIT_API="${GIT_API}"
+export GIT_API_THEMES="${GIT_API_THEMES}"
 EOF
 
 . /etc/profile.d/cyberpanel_env.sh
