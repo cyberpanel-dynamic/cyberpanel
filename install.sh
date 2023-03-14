@@ -43,30 +43,35 @@ check_valid_os() {
 	OUTPUT=$(cat /etc/*release)
 	if  echo $OUTPUT | grep -q "CentOS Linux 7" ; then
     echo "\nDetecting CentOS 7...\n"
+		yum install epel-release -y
 		yum update -y
 		yum install curl wget git jq -y 1> /dev/null
 		yum update curl wget git jq ca-certificates -y 1> /dev/null
                 SERVER_OS="CentOS"
 	elif echo $OUTPUT | grep -q "CentOS Linux 8" ; then
     echo -e "\nDetecting Centos 8...\n"
+		yum install epel-release -y
 		yum update -y
 		yum install curl wget git jq -y 1> /dev/null
 		yum update curl wget git jq ca-certificates -y 1> /dev/null
 		SERVER_OS="CentOS8"
 	elif echo $OUTPUT | grep -q "CloudLinux 7" ; then
     echo "\nDetecting Cloudlinux 7...\n"
+		yum install epel-release -y
 		yum update -y
 		yum install curl wget git jq -y 1> /dev/null
 		yum update curl wget git jq ca-certificates -y 1> /dev/null
     SERVER_OS="CloudLinux"
   elif echo $OUTPUT | grep -q "AlmaLinux 8" ; then
 		echo "\nDetecting Almalinux 8...\n"
+		yum install epel-release -y
 		yum update -y
 		yum install curl wget git jq -y 1> /dev/null
 		yum update curl wget git jq ca-certificates -y 1> /dev/null
     SERVER_OS="AlmaLinux"
   elif echo $OUTPUT | grep -q "Rocky Linux" ; then
 		echo "\nDetecting Rocky Linux...\n"
+		yum install epel-release -y
 		yum update -y
 		yum install curl wget git jq -y 1> /dev/null
 		yum update curl wget git jq ca-certificates -y 1> /dev/null
@@ -83,6 +88,7 @@ check_valid_os() {
     SERVER_OS="Ubuntu20"
 	elif echo $OUTPUT | grep -q "openEuler 20.03" ; then
     echo -e "\nDetecting openEuler 20.03...\n"
+		yum install epel-release -y
 		yum update -y
     yum install curl wget git jq -y 1> /dev/null
 		yum update curl wget git jq ca-certificates -y 1> /dev/null
@@ -90,6 +96,7 @@ check_valid_os() {
 	elif echo $OUTPUT | grep -q "openEuler 22.03" ; then
     echo -e "\nDetecting openEuler 22.03...\n"
     SERVER_OS="openEuler"
+		yum install epel-release -y
 		yum update -y
 		yum install curl wget git jq -y 1> /dev/null
 		yum update curl wget git jq ca-certificates -y 1> /dev/null
