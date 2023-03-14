@@ -25,12 +25,12 @@ jobs:
       - name: Install Cron
         run: |
           yum update -y
-          yum install crontabs python3 python3-devel openssl -y
+          yum install crontabs python3 python3-devel openssl systemd -y
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Keep the container running
-        run: sleep 30m
+      - name: Keep the container running for 10 minutes
+        run: sleep 10m
         shell: bash
   centos8:
     name: Cyberpanel on Centos 8
@@ -65,8 +65,8 @@ jobs:
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Keep the container running
-        run: sleep 30m
+      - name: Keep the container running for 10 minutes
+        run: sleep 10m
         shell: bash
   almalinux8:
     name: Cyberpanel on Almalinux 8
@@ -105,8 +105,8 @@ jobs:
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Keep the container running
-        run: sleep 30m
+      - name: Keep the container running for 10 minutes
+        run: sleep 10m
   rockylinux:
     name: Cyberpanel on Rockylinux
     runs-on: ubuntu-latest
@@ -142,8 +142,8 @@ jobs:
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Keep the container running
-        run: sleep 30m
+      - name: Keep the container running for 10 minutes
+        run: sleep 10m
   openeuler2003:
     name: Cyberpanel on Openeuler 20.03
     runs-on: ubuntu-latest
@@ -171,8 +171,8 @@ jobs:
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Keep the container running
-        run: sleep 30m
+      - name: Keep the container running for 10 minutes
+        run: sleep 10m
   openeuler2203:
     name: Cyberpanel on Openeuler 22.03
     runs-on: ubuntu-latest
@@ -198,8 +198,8 @@ jobs:
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Keep the container running
-        run: sleep 30m
+      - name: Keep the container running for 10 minutes
+        run: sleep 10m
         shell: bash
   ubuntu1804:
     name: Cyberpanel on Ubuntu 18.04
@@ -240,8 +240,8 @@ jobs:
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Keep the container running
-        run: sleep 30m
+      - name: Keep the container running for 10 minutes
+        run: sleep 10m
         shell: bash
   ubuntu2004:
     name: Cyberpanel on Ubuntu 20.04
@@ -280,6 +280,6 @@ jobs:
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Keep the container running
-        run: sleep 30m
+      - name: Keep the container running for 10 minutes
+        run: sleep 10m
         shell: bash
