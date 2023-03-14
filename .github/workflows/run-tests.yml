@@ -92,7 +92,7 @@ jobs:
     name: Cyberpanel on Almalinux 8
     runs-on: ubuntu-latest
     container:
-      image: almalinux:8
+      image: fauust/docker-systemd:almalinux-8
       options: --user root
       env:
         USER: cyberpanel-dynamic
@@ -256,7 +256,7 @@ jobs:
     name: Cyberpanel on Ubuntu 18.04
     runs-on: ubuntu-latest
     container:
-      image: ubuntu:bionic
+      image: fauust/docker-systemd:ubuntu-18.04
       options: --user root
       env:
         USER: cyberpanel-dynamic
@@ -276,7 +276,7 @@ jobs:
           apt install -y wget curl cron 
           crontab -l | { cat; } | crontab -
       - name: Install Cyberpanel from current Repository
-        run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
+        run: printf "\n1\n1\n\n\n\n\n\n5\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Restart after installation
         run: reboot
@@ -297,7 +297,7 @@ jobs:
     name: Cyberpanel on Ubuntu 20.04
     runs-on: ubuntu-latest
     container:
-      image: ubuntu:focal
+      image: fauust/docker-systemd:ubuntu-20.04
       options: --user root
       env:
         USER: cyberpanel-dynamic
