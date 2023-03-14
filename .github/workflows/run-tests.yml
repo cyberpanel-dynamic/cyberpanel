@@ -14,7 +14,7 @@ jobs:
         UPGRADE_BRANCH: v2.3.2
     steps:
       - name: Install Cyberpanel from current Repository
-        run: printf "\n\n\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
+        run: printf "1\n1\n\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Restart after installation
         run: reboot
@@ -43,7 +43,7 @@ jobs:
         UPGRADE_BRANCH: v2.3.2
     steps:
       - name: Install Cyberpanel from current Repository
-        run: printf "\n\n\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
+        run: printf "1\n1\n\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Restart after installation
         run: reboot
@@ -74,7 +74,7 @@ jobs:
       - name: Install wget and curl
         run: apt update -y && apt install -y wget curl
       - name: Install Cyberpanel from current Repository
-        run: printf "\n\n\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
+        run: printf "1\n1\n\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Restart after installation
         run: reboot
@@ -105,7 +105,7 @@ jobs:
       - name: Install wget and curl
         run: apt update -y && apt install -y wget curl
       - name: Install Cyberpanel from current Repository
-        run: printf "\n\n\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
+        run: printf "1\n1\n\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Restart after installation
         run: reboot
@@ -136,7 +136,7 @@ jobs:
       - name: Install wget and curl
         run: apt update -y && apt install -y wget curl
       - name: Install Cyberpanel from current Repository
-        run: printf "\n\n\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
+        run: printf "1\n1\n\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Restart after installation
         run: reboot
@@ -167,7 +167,7 @@ jobs:
       - name: Install wget and curl
         run: apt update -y && apt install -y wget curl
       - name: Install Cyberpanel from current Repository
-        run: printf "\n\n\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
+        run: printf "1\n1\n\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Restart after installation
         run: reboot
