@@ -1,8 +1,0 @@
-#!/bin/sh
-
-BRANCH_NAME=v$(curl -s $RAW_GIT_REPO/version.txt | sed -e 's|{"version":"||g' -e 's|","build":|.|g'| sed 's:}*$::')
-
-rm -f /usr/local/cyberpanel_upgrade.sh
-wget -O /usr/local/cyberpanel_upgrade.sh $GIT_REPO/$BRANCH_NAME/cyberpanel_upgrade.sh 2>/dev/null
-chmod 700 /usr/local/cyberpanel_upgrade.sh
-/usr/local/cyberpanel_upgrade.sh
