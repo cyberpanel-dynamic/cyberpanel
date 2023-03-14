@@ -93,7 +93,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: fauust/docker-systemd:almalinux-8
-      options: --user root
+      options: --user root --privileged
+      volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup
       env:
         USER: cyberpanel-dynamic
         REPO: cyberpanel
@@ -257,7 +259,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: fauust/docker-systemd:ubuntu-18.04
-      options: --user root
+      options: --user root --privileged
+      volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup
       env:
         USER: cyberpanel-dynamic
         REPO: cyberpanel
@@ -298,7 +302,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: fauust/docker-systemd:ubuntu-20.04
-      options: --user root
+      options: --user root --privileged
+      volumes:
+        - /sys/fs/cgroup:/sys/fs/cgroup
       env:
         USER: cyberpanel-dynamic
         REPO: cyberpanel
