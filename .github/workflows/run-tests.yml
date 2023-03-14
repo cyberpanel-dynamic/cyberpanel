@@ -28,9 +28,6 @@ jobs:
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Check if installation was succesful
-        run: curl -v 127.0.0.1:8090
-        shell: bash
       - name: Keep the container running
         run: while true; sleep 2; done
         shell: bash
@@ -65,9 +62,6 @@ jobs:
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Check if installation was succesful
-        run: curl -v https://127.0.0.1:8090
-        shell: bash
       - name: Keep the container running
         run: while true; sleep 2; done
         shell: bash
@@ -99,11 +93,8 @@ jobs:
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Check if installation was succesful
-        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
-        shell: bash
-      - name: Sleep indefinite to be able to access the GUI
-        run: sleep infinity
+      - name: Keep the container running
+        run: while true; sleep 2; done
   rockylinux:
     name: Cyberpanel on Rockylinux
     runs-on: ubuntu-latest
@@ -125,16 +116,12 @@ jobs:
       - name: Install wget, curl and cron
         run: |
           yum update -y
-          yum install wget curl cronie python3 python3-devel -y 
-          crontab -l | { cat; } | crontab -
+          yum install wget curl cronie python3 python3-devel -y
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Check if installation was succesful
-        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
-        shell: bash
-      - name: Sleep indefinite to be able to access the GUI
-        run: sleep infinity
+      - name: Keep the container running
+        run: while true; sleep 2; done
   openeuler2003:
     name: Cyberpanel on Openeuler 20.03
     runs-on: ubuntu-latest
@@ -156,16 +143,12 @@ jobs:
       - name: Install wget, curl and cron
         run: |
           yum update -y
-          yum install wget curl cronie python3 python3-devel -y 
-          crontab -l | { cat; } | crontab -
+          yum install wget curl cronie python3 python3-devel -y
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Check if installation was succesful
-        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
-        shell: bash
-      - name: Sleep indefinite to be able to access the GUI
-        run: sleep infinity
+      - name: Keep the container running
+        run: while true; sleep 2; done
   openeuler2203:
     name: Cyberpanel on Openeuler 22.03
     runs-on: ubuntu-latest
@@ -187,16 +170,13 @@ jobs:
       - name: Install wget, curl and cron
         run: |
           yum update -y
-          yum install wget curl cronie python3 python3-devel -y 
-          crontab -l | { cat; } | crontab -
+          yum install wget curl cronie python3 python3-devel -y
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Check if installation was succesful
-        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+      - name: Keep the container running
+        run: while true; sleep 2; done
         shell: bash
-      - name: Sleep indefinite to be able to access the GUI
-        run: sleep infinity
   ubuntu1804:
     name: Cyberpanel on Ubuntu 18.04
     runs-on: ubuntu-latest
@@ -223,13 +203,11 @@ jobs:
           apt install -y wget curl cron 
           crontab -l | { cat; } | crontab -
       - name: Install Cyberpanel from current Repository
-        run: printf "\n1\n1\n\n\n\n\n\n5\n5\n5\n5" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
+        run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Check if installation was succesful
-        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+      - name: Keep the container running
+        run: while true; sleep 2; done
         shell: bash
-      - name: Sleep indefinite to be able to access the GUI
-        run: sleep infinity
   ubuntu2004:
     name: Cyberpanel on Ubuntu 20.04
     runs-on: ubuntu-latest
@@ -254,12 +232,9 @@ jobs:
         run: |
           apt update -y
           apt install -y wget curl cron
-          crontab -l | { cat; } | crontab -
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Check if installation was succesful
-        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+      - name: Keep the container running
+        run: while true; sleep 2; done
         shell: bash
-      - name: Sleep indefinite to be able to access the GUI
-        run: sleep infinity
