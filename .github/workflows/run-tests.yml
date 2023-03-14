@@ -114,7 +114,16 @@ jobs:
       - name: Install wget, curl and cron
         run: |
           yum update -y
-          yum install crontabs cronie python3 python3-devel findutils -y
+          yum install crontabs cronie python3 python3-devel findutils systemd -y
+          (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done);
+          rm -f /lib/systemd/system/multi-user.target.wants/*;
+          rm -f /etc/systemd/system/*.wants/*;
+          rm -f /lib/systemd/system/local-fs.target.wants/*;
+          rm -f /lib/systemd/system/sockets.target.wants/*udev*;
+          rm -f /lib/systemd/system/sockets.target.wants/*initctl*;
+          rm -f /lib/systemd/system/basic.target.wants/*;
+          rm -f /lib/systemd/system/anaconda.target.wants/*;
+          /usr/sbin/init
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -200,8 +209,16 @@ jobs:
       - name: Install wget, curl and cron
         run: |
           apt update -y 
-          apt install -y wget curl cron 
-          crontab -l | { cat; } | crontab -
+          apt install -y wget curl cron systemd
+          (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done);
+          rm -f /lib/systemd/system/multi-user.target.wants/*;
+          rm -f /etc/systemd/system/*.wants/*;
+          rm -f /lib/systemd/system/local-fs.target.wants/*;
+          rm -f /lib/systemd/system/sockets.target.wants/*udev*;
+          rm -f /lib/systemd/system/sockets.target.wants/*initctl*;
+          rm -f /lib/systemd/system/basic.target.wants/*;
+          rm -f /lib/systemd/system/anaconda.target.wants/*;
+          /usr/sbin/init
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -231,7 +248,16 @@ jobs:
       - name: Install wget, curl and cron
         run: |
           apt update -y
-          apt install -y wget curl cron
+          apt install -y wget curl cron systemd
+          (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done);
+          rm -f /lib/systemd/system/multi-user.target.wants/*;
+          rm -f /etc/systemd/system/*.wants/*;
+          rm -f /lib/systemd/system/local-fs.target.wants/*;
+          rm -f /lib/systemd/system/sockets.target.wants/*udev*;
+          rm -f /lib/systemd/system/sockets.target.wants/*initctl*;
+          rm -f /lib/systemd/system/basic.target.wants/*;
+          rm -f /lib/systemd/system/anaconda.target.wants/*;
+          /usr/sbin/init
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
