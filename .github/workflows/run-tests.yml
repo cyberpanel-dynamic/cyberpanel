@@ -28,7 +28,7 @@ jobs:
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Keep the container running
-        run: while sleep 2; do echo thinking; done
+        run: sleep 30m
         shell: bash
   centos8:
     name: Cyberpanel on Centos 8
@@ -62,7 +62,7 @@ jobs:
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Keep the container running
-        run: while sleep 2; do echo thinking; done
+        run: sleep 30m
         shell: bash
   almalinux8:
     name: Cyberpanel on Almalinux 8
@@ -92,7 +92,7 @@ jobs:
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Keep the container running
-        run: while sleep 2; do echo thinking; done
+        run: sleep 30m
   rockylinux:
     name: Cyberpanel on Rockylinux
     runs-on: ubuntu-latest
@@ -119,7 +119,7 @@ jobs:
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Keep the container running
-        run: while sleep 2; do echo thinking; done
+        run: sleep 30m
   openeuler2003:
     name: Cyberpanel on Openeuler 20.03
     runs-on: ubuntu-latest
@@ -146,7 +146,7 @@ jobs:
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Keep the container running
-        run: while sleep 2; do echo thinking; done
+        run: sleep 30m
   openeuler2203:
     name: Cyberpanel on Openeuler 22.03
     runs-on: ubuntu-latest
@@ -173,7 +173,7 @@ jobs:
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Keep the container running
-        run: while sleep 2; do echo thinking; done
+        run: sleep 30m
         shell: bash
   ubuntu1804:
     name: Cyberpanel on Ubuntu 18.04
@@ -206,7 +206,7 @@ jobs:
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Keep the container running
-        run: while sleep 2; do echo thinking; done
+        run: sleep 30m
         shell: bash
   ubuntu2004:
     name: Cyberpanel on Ubuntu 20.04
@@ -236,5 +236,5 @@ jobs:
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Keep the container running
-        run: while sleep 2; do echo thinking; done
+        run: sleep 30m
         shell: bash
