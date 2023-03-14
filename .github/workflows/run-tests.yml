@@ -20,11 +20,6 @@ jobs:
       - name: set home env
         shell: bash
         run: "echo HOME=/root | tee -a $GITHUB_ENV"
-      - name: Fix missing mirrorlist
-        run: |
-          cd /etc/yum.repos.d/ 
-          sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
-          sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
       - name: Install Cron
         run: |
           yum update -y
@@ -35,6 +30,9 @@ jobs:
         shell: bash
       - name: Check if installation was succesful
         run: curl -v 127.0.0.1:8090
+        shell: bash
+      - name: Keep the container running
+        run: while true; sleep 2; done
         shell: bash
   centos8:
     name: Cyberpanel on Centos 8
@@ -69,6 +67,9 @@ jobs:
         shell: bash
       - name: Check if installation was succesful
         run: curl -v https://127.0.0.1:8090
+        shell: bash
+      - name: Keep the container running
+        run: while true; sleep 2; done
         shell: bash
   almalinux8:
     name: Cyberpanel on Almalinux 8
