@@ -19,7 +19,7 @@ jobs:
     steps:
       - name: set home env
         shell: bash
-        run: "echo HOME=/root | sudo tee -a $GITHUB_ENV"
+        run: "echo HOME=/root | tee -a $GITHUB_ENV"
       - name: Install Cron
         run: |
           yum update -y
@@ -59,7 +59,7 @@ jobs:
     steps:
       - name: set home env
         shell: bash
-        run: "echo HOME=/root | sudo tee -a $GITHUB_ENV"
+        run: "echo HOME=/root | tee -a $GITHUB_ENV"
       - name: Fix missing mirrorlist (Bug in CentOS 8 Container)
         run: |
           cd /etc/yum.repos.d/ 
@@ -105,7 +105,7 @@ jobs:
     steps:
       - name: set home env
         shell: bash
-        run: "echo HOME=/root | sudo tee -a $GITHUB_ENV"
+        run: "echo HOME=/root | tee -a $GITHUB_ENV"
       - name: Install wget, curl and cron
         run: |
           yum update -y
@@ -146,7 +146,7 @@ jobs:
     steps:
       - name: set home env
         shell: bash
-        run: "echo HOME=/root | sudo tee -a $GITHUB_ENV"
+        run: "echo HOME=/root | tee -a $GITHUB_ENV"
       - name: Install wget, curl and cron
         run: |
           yum update -y
@@ -187,7 +187,7 @@ jobs:
     steps:
       - name: set home env
         shell: bash
-        run: "echo HOME=/root | sudo tee -a $GITHUB_ENV"
+        run: "echo HOME=/root | tee -a $GITHUB_ENV"
       - name: Install wget, curl and cron
         run: |
           yum update -y
@@ -228,7 +228,7 @@ jobs:
     steps:
       - name: set home env
         shell: bash
-        run: "echo HOME=/root | sudo tee -a $GITHUB_ENV"
+        run: "echo HOME=/root | tee -a $GITHUB_ENV"
       - name: Install wget, curl and cron
         run: |
           yum update -y
@@ -269,7 +269,7 @@ jobs:
     steps:
       - name: set home env
         shell: bash
-        run: "echo HOME=/root | sudo tee -a $GITHUB_ENV"
+        run: "echo HOME=/root | tee -a $GITHUB_ENV"
       - name: Install wget, curl and cron
         run: |
           apt update -y 
@@ -310,7 +310,7 @@ jobs:
     steps:
       - name: set home env
         shell: bash
-        run: "echo HOME=/root | sudo tee -a $GITHUB_ENV"
+        run: "echo HOME=/root | tee -a $GITHUB_ENV"
       - name: Install wget, curl and cron
         run: |
           apt update -y
