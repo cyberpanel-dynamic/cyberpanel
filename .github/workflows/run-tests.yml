@@ -69,7 +69,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: fauust/docker-systemd:almalinux-8
-      options: --user root --sysctl --privileged
+      options: --user root --privileged --sysctl net.ipv4.ip_forward=1 --sysctl net.ipv6.ip_forward=1
       volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup
       env:
@@ -141,7 +141,7 @@ jobs:
       - name: Install wget, curl and cron
         run: |
           yum update -y
-          yum install crontabs python3 python3-devel -y
+          yum install crontabs cronie python3 python3-devel -y
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -168,7 +168,7 @@ jobs:
       - name: Install wget, curl and cron
         run: |
           yum update -y
-          yum install crontabs python3 python-pip -y
+          yum install crontabs cronie python3 python-pip -y
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -180,7 +180,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: fauust/docker-systemd:ubuntu-18.04
-      options: --user root --privileged -d
+      options: --user root --privileged
       volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup
       env:
@@ -213,7 +213,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: fauust/docker-systemd:ubuntu-20.04
-      options: --user root --privileged -d
+      options: --user root --privileged
       volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup
       env:
