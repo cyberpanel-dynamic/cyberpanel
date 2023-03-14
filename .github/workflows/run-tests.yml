@@ -16,7 +16,7 @@ jobs:
       - name: Install Cron
         run: |
           yum update -y
-          yum install cron -y
+          yum install cronie python-pip -y
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -54,7 +54,7 @@ jobs:
       - name: Install Cron
         run: |
           yum update -y
-          yum install cron -y
+          yum install vixie-cron python-pip -y
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -87,7 +87,7 @@ jobs:
       - name: Install wget, curl and cron
         run: |
           yum update -y
-          yum install wget curl cron -y
+          yum install wget curl vixie-cron python-pip -y
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -120,7 +120,7 @@ jobs:
       - name: Install wget, curl and cron
         run: |
           yum update -y
-          yum install wget curl cron -y
+          yum install wget curl vixie-cron python-pip -y
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -153,7 +153,7 @@ jobs:
       - name: Install wget, curl and cron
         run: |
           yum update -y
-          yum install wget curl cron -y
+          yum install wget curl cronie python-pip -y
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -186,7 +186,7 @@ jobs:
       - name: Install wget, curl and cron
         run: |
           yum update -y
-          yum install wget curl -y
+          yum install wget curl cron python-pip -y
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -217,7 +217,7 @@ jobs:
         UPGRADE_BRANCH: v2.3.2
     steps:
       - name: Install wget, curl and cron
-        run: apt update -y && apt install -y wget curl cron
+        run: apt update -y && apt install -y wget curl cron && crontab -e
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -248,7 +248,7 @@ jobs:
         UPGRADE_BRANCH: v2.3.2
     steps:
       - name: Install wget, curl and cron
-        run: apt update -y && apt install -y wget curl cron
+        run: apt update -y && apt install -y wget curl cron && crontab -e
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
