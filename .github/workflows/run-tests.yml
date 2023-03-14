@@ -64,13 +64,15 @@ jobs:
     name: Cyberpanel on Openeuler 20.03
     runs-on: ubuntu-latest
     container:
-      image: openeuler:20.03
+      image: openeuler/openeuler:20.03
       env:
         USER: cyberpanel-dynamic
         REPO: cyberpanel
         BRANCH: stable
         UPGRADE_BRANCH: v2.3.2
     steps:
+      - name: Install wget and curl
+        run: apt update -y && apt install -y wget curl
       - name: Install Cyberpanel from current Repository
         run: printf "\n\n\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -93,13 +95,15 @@ jobs:
     name: Cyberpanel on Openeuler 22.03
     runs-on: ubuntu-latest
     container:
-      image: openeuler:22.03
+      image: openeuler/openeuler:22.03
       env:
         USER: cyberpanel-dynamic
         REPO: cyberpanel
         BRANCH: stable
         UPGRADE_BRANCH: v2.3.2
     steps:
+      - name: Install wget and curl
+        run: apt update -y && apt install -y wget curl
       - name: Install Cyberpanel from current Repository
         run: printf "\n\n\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -129,6 +133,8 @@ jobs:
         BRANCH: stable
         UPGRADE_BRANCH: v2.3.2
     steps:
+      - name: Install wget and curl
+        run: apt update -y && apt install -y wget curl
       - name: Install Cyberpanel from current Repository
         run: printf "\n\n\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -158,6 +164,8 @@ jobs:
         BRANCH: stable
         UPGRADE_BRANCH: v2.3.2
     steps:
+      - name: Install wget and curl
+        run: apt update -y && apt install -y wget curl
       - name: Install Cyberpanel from current Repository
         run: printf "\n\n\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
