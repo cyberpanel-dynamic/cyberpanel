@@ -1088,6 +1088,7 @@ Pre_Install_Required_Components() {
 	Retry_Command "git clone ${Git_Clone_URL}"
   		Check_Return "git clone ${Git_Clone_URL}"
 
+	export REPO_CLONED="1"
 	echo -e "\nCyberPanel source code downloaded...\n"
 
 	cd cyberpanel || exit

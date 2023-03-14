@@ -383,8 +383,8 @@ class preFlightsChecks:
         os.chdir('/usr/local')
 
         command = "git clone " + GIT_CLONE_URL
-        preFlightsChecks.call(command, self.distro, command, command, 1, 1, os.EX_OSERR)
-
+        if not 'REPO_CLONED' in os.environ:
+            preFlightsChecks.call(command, self.distro, command, command, 1, 1, os.EX_OSERR)
         shutil.move('cyberpanel', 'CyberCP')
 
         ##

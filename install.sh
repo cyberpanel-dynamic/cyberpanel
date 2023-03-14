@@ -11,7 +11,6 @@ export GIT_THEMES_REPO="https://${GIT_PROVIDER}/${BASE_REPO_THEMES}"
 export RAW_GIT_THEMES_REPO="https://${RAW_CONTENT}/${BASE_REPO_THEMES}"
 export GIT_API="https://api.${GIT_PROVIDER}/repos/${BASE_REPO}"
 export GIT_API_THEMES="https://api.${GIT_PROVIDER}/repos/${BASE_REPO_THEMES}"
-
 cat << EOF > /etc/profile.d/cyberpanel_env.sh
 export GIT_PROVIDER="${GIT_PROVIDER}"
 export RAW_CONTENT="${RAW_CONTENT}"
