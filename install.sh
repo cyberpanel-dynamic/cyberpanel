@@ -68,9 +68,11 @@ check_valid_os() {
 		yum update curl wget ca-certificates -y 1> /dev/null
 		SERVER_OS="RockyLinux"
 	elif echo $OUTPUT | grep -q "Ubuntu 18.04" ; then
+		apt update
 		apt install -y -qq wget curl git jq
                 SERVER_OS="Ubuntu"
 	elif echo $OUTPUT | grep -q "Ubuntu 20.04" ; then
+		apt update
 		apt install -y -qq wget curl git jq
                 SERVER_OS="Ubuntu20"
 	elif echo $OUTPUT | grep -q "openEuler 20.03" ; then
