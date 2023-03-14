@@ -65,6 +65,72 @@ jobs:
       - name: check if upgrade was succesful
         run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
         shell: bash
+  almalinux8:
+    name: Cyberpanel on Almalinux 8
+    runs-on: ubuntu-latest
+    container:
+      image: almalinux:8
+      env:
+        USER: cyberpanel-dynamic
+        REPO: cyberpanel
+        BRANCH: stable
+        UPGRADE_BRANCH: v2.3.2
+    steps:
+      - name: Install wget and curl
+        run: |
+          yum update -y
+          yum install wget curl -y
+      - name: Install Cyberpanel from current Repository
+        run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
+        shell: bash
+      - name: Restart after installation
+        run: reboot
+        shell: bash
+      - name: Check if installation was succesful
+        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+        shell: bash
+      - name: Upgrade Cyberpanel from current Repository
+        run: printf "\n\n\n\n\n\n\n\n" | sh <(curl https://raw.githubusercontent.com/$USER/$REPO/$UPGRADE_BRANCH/preUpgrade.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/preUpgrade.sh)
+        shell: bash
+      - name: Restart after Upgrade
+        run: reboot
+        shell: bash
+      - name: check if upgrade was succesful
+        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+        shell: bash
+  rockylinux:
+    name: Cyberpanel on Rockylinux
+    runs-on: ubuntu-latest
+    container:
+      image: rockylinux:8
+      env:
+        USER: cyberpanel-dynamic
+        REPO: cyberpanel
+        BRANCH: stable
+        UPGRADE_BRANCH: v2.3.2
+    steps:
+      - name: Install wget and curl
+        run: |
+          yum update -y
+          yum install wget curl -y
+      - name: Install Cyberpanel from current Repository
+        run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
+        shell: bash
+      - name: Restart after installation
+        run: reboot
+        shell: bash
+      - name: Check if installation was succesful
+        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+        shell: bash
+      - name: Upgrade Cyberpanel from current Repository
+        run: printf "\n\n\n\n\n\n\n\n" | sh <(curl https://raw.githubusercontent.com/$USER/$REPO/$UPGRADE_BRANCH/preUpgrade.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/preUpgrade.sh)
+        shell: bash
+      - name: Restart after Upgrade
+        run: reboot
+        shell: bash
+      - name: check if upgrade was succesful
+        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+        shell: bash
   openeuler2003:
     name: Cyberpanel on Openeuler 20.03
     runs-on: ubuntu-latest
@@ -79,7 +145,7 @@ jobs:
       - name: Install wget and curl
         run: |
           yum update -y
-          yum install wget curl
+          yum install wget curl -y
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -112,7 +178,7 @@ jobs:
       - name: Install wget and curl
         run: |
           yum update -y
-          yum install wget curl
+          yum install wget curl -y
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
