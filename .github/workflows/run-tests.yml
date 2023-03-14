@@ -7,12 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: centos:centos7
+      options: --user root
       env:
         USER: cyberpanel-dynamic
         REPO: cyberpanel
         BRANCH: stable
         UPGRADE_BRANCH: v2.3.2
         GITHUB_HOME: /root
+        GITHUB_RUNNER_HOME: /root
+        HOME: /root
     steps:
       - name: Install Cron
         run: |
@@ -41,12 +44,15 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: centos:centos8
+      options: --user root
       env:
         USER: cyberpanel-dynamic
         REPO: cyberpanel
         BRANCH: stable
         UPGRADE_BRANCH: v2.3.2
         GITHUB_HOME: /root
+        GITHUB_RUNNER_HOME: /root
+        HOME: /root
     steps:
       - name: Fix missing mirrorlist (Bug in CentOS 8 Container)
         run: |
@@ -81,12 +87,15 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: almalinux:8
+      options: --user root
       env:
         USER: cyberpanel-dynamic
         REPO: cyberpanel
         BRANCH: stable
         UPGRADE_BRANCH: v2.3.2
         GITHUB_HOME: /root
+        GITHUB_RUNNER_HOME: /root
+        HOME: /root
     steps:
       - name: Install wget, curl and cron
         run: |
@@ -116,12 +125,15 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: rockylinux:8
+      options: --user root
       env:
         USER: cyberpanel-dynamic
         REPO: cyberpanel
         BRANCH: stable
         UPGRADE_BRANCH: v2.3.2
         GITHUB_HOME: /root
+        GITHUB_RUNNER_HOME: /root
+        HOME: /root
     steps:
       - name: Install wget, curl and cron
         run: |
@@ -151,12 +163,15 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: openeuler/openeuler:20.03
+      options: --user root
       env:
         USER: cyberpanel-dynamic
         REPO: cyberpanel
         BRANCH: stable
         UPGRADE_BRANCH: v2.3.2
         GITHUB_HOME: /root
+        GITHUB_RUNNER_HOME: /root
+        HOME: /root
     steps:
       - name: Install wget, curl and cron
         run: |
@@ -186,12 +201,15 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: openeuler/openeuler:22.03
+      options: --user root
       env:
         USER: cyberpanel-dynamic
         REPO: cyberpanel
         BRANCH: stable
         UPGRADE_BRANCH: v2.3.2
         GITHUB_HOME: /root
+        GITHUB_RUNNER_HOME: /root
+        HOME: /root
     steps:
       - name: Install wget, curl and cron
         run: |
@@ -221,12 +239,15 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ubuntu:bionic
+      options: --user root
       env:
         USER: cyberpanel-dynamic
         REPO: cyberpanel
         BRANCH: stable
         UPGRADE_BRANCH: v2.3.2
         GITHUB_HOME: /root
+        GITHUB_RUNNER_HOME: /root
+        HOME: /root
     steps:
       - name: Install wget, curl and cron
         run: |
@@ -256,12 +277,15 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ubuntu:focal
+      options: --user root
       env:
         USER: cyberpanel-dynamic
         REPO: cyberpanel
         BRANCH: stable
         UPGRADE_BRANCH: v2.3.2
         GITHUB_HOME: /root
+        GITHUB_RUNNER_HOME: /root
+        HOME: /root
     steps:
       - name: Install wget, curl and cron
         run: |
