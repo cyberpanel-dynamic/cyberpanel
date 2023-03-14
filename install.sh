@@ -45,61 +45,61 @@ check_valid_os() {
     echo "\nDetecting CentOS 7...\n"
 		yum install epel-release -y
 		yum update -y
-		yum install curl wget git jq -y 1> /dev/null
-		yum update curl wget git jq ca-certificates -y 1> /dev/null
+		yum install curl wget git jq ping -y 1> /dev/null
+		yum update curl wget git jq ping ca-certificates -y 1> /dev/null
                 SERVER_OS="CentOS"
 	elif echo $OUTPUT | grep -q "CentOS Linux 8" ; then
     echo -e "\nDetecting Centos 8...\n"
 		yum install epel-release -y
 		yum update -y
-		yum install curl wget git jq -y 1> /dev/null
-		yum update curl wget git jq ca-certificates -y 1> /dev/null
+		yum install curl wget git jq ping -y 1> /dev/null
+		yum update curl wget git jq ping ca-certificates -y 1> /dev/null
 		SERVER_OS="CentOS8"
 	elif echo $OUTPUT | grep -q "CloudLinux 7" ; then
     echo "\nDetecting Cloudlinux 7...\n"
 		yum install epel-release -y
 		yum update -y
-		yum install curl wget git jq -y 1> /dev/null
-		yum update curl wget git jq ca-certificates -y 1> /dev/null
+		yum install curl wget git jq ping -y 1> /dev/null
+		yum update curl wget git jq ping ca-certificates -y 1> /dev/null
     SERVER_OS="CloudLinux"
   elif echo $OUTPUT | grep -q "AlmaLinux 8" ; then
 		echo "\nDetecting Almalinux 8...\n"
 		yum install epel-release -y
 		yum update -y
-		yum install curl wget git jq -y 1> /dev/null
-		yum update curl wget git jq ca-certificates -y 1> /dev/null
+		yum install curl wget git jq ping -y 1> /dev/null
+		yum update curl wget git jq ping ca-certificates -y 1> /dev/null
     SERVER_OS="AlmaLinux"
   elif echo $OUTPUT | grep -q "Rocky Linux" ; then
 		echo "\nDetecting Rocky Linux...\n"
 		yum install epel-release -y
 		yum update -y
-		yum install curl wget git jq -y 1> /dev/null
-		yum update curl wget git jq ca-certificates -y 1> /dev/null
+		yum install curl wget git jq ping -y 1> /dev/null
+		yum update curl wget git jq ping ca-certificates -y 1> /dev/null
 		SERVER_OS="RockyLinux"
 	elif echo $OUTPUT | grep -q "Ubuntu 18.04" ; then
 		echo "\nDetecting Ubuntu 18.04...\n"
 		apt update -y
-		apt install -y -qq wget curl git jq
+		apt install -y -qq wget curl git jq ping
     SERVER_OS="Ubuntu"
 	elif echo $OUTPUT | grep -q "Ubuntu 20.04" ; then
 		echo "\nDetecting Ubuntu 20.04...\n"
 		apt update -y
-		apt install -y -qq wget curl git jq
+		apt install -y -qq wget curl git jq ping
     SERVER_OS="Ubuntu20"
 	elif echo $OUTPUT | grep -q "openEuler 20.03" ; then
     echo -e "\nDetecting openEuler 20.03...\n"
 		yum install epel-release -y
 		yum update -y
-    yum install curl wget git jq -y 1> /dev/null
-		yum update curl wget git jq ca-certificates -y 1> /dev/null
+    yum install curl wget git jq ping -y 1> /dev/null
+		yum update curl wget git jq ping ca-certificates -y 1> /dev/null
 		SERVER_OS="openEuler"
 	elif echo $OUTPUT | grep -q "openEuler 22.03" ; then
     echo -e "\nDetecting openEuler 22.03...\n"
     SERVER_OS="openEuler"
 		yum install epel-release -y
 		yum update -y
-		yum install curl wget git jq -y 1> /dev/null
-		yum update curl wget git jq ca-certificates -y 1> /dev/null
+		yum install curl wget git jq ping -y 1> /dev/null
+		yum update curl wget git jq ping ca-certificates -y 1> /dev/null
 	else
 		echo -e "\nUnable to detect your OS...\n"
 		echo -e "\nCyberPanel is supported on Ubuntu 18.04, CentOS 7.x and CloudLinux 7.x...\n"
