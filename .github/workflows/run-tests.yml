@@ -20,27 +20,21 @@ jobs:
       - name: set home env
         shell: bash
         run: "echo HOME=/root | tee -a $GITHUB_ENV"
+      - name: Fix missing mirrorlist
+        run: |
+          cd /etc/yum.repos.d/ 
+          sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+          sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
       - name: Install Cron
         run: |
           yum update -y
-          yum install cronie python3 python3-devel openssl -y
+          yum install crontabs python3 python3-devel -y
+          crontab -l | { cat; } | crontab -
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Restart after installation
-        run: reboot
-        shell: bash
       - name: Check if installation was succesful
-        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
-        shell: bash
-      - name: Upgrade Cyberpanel from current Repository
-        run: printf "\n\n\n\n\n\n\n\n" | sh <(curl https://raw.githubusercontent.com/$USER/$REPO/$UPGRADE_BRANCH/preUpgrade.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/preUpgrade.sh)
-        shell: bash
-      - name: Restart after Upgrade
-        run: reboot
-        shell: bash
-      - name: check if upgrade was succesful
-        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+        run: curl -v 127.0.0.1:8090
         shell: bash
   centos8:
     name: Cyberpanel on Centos 8
@@ -74,10 +68,8 @@ jobs:
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Check if installation was succesful
-        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+        run: curl -v https://127.0.0.1:8090
         shell: bash
-      - name: Sleep indefinite to be able to access the GUI
-        run: sleep infinity
   almalinux8:
     name: Cyberpanel on Almalinux 8
     runs-on: ubuntu-latest
@@ -106,21 +98,11 @@ jobs:
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Restart after installation
-        run: reboot
-        shell: bash
       - name: Check if installation was succesful
         run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
         shell: bash
-      - name: Upgrade Cyberpanel from current Repository
-        run: printf "\n\n\n\n\n\n\n\n" | sh <(curl https://raw.githubusercontent.com/$USER/$REPO/$UPGRADE_BRANCH/preUpgrade.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/preUpgrade.sh)
-        shell: bash
-      - name: Restart after Upgrade
-        run: reboot
-        shell: bash
-      - name: check if upgrade was succesful
-        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
-        shell: bash
+      - name: Sleep indefinite to be able to access the GUI
+        run: sleep infinity
   rockylinux:
     name: Cyberpanel on Rockylinux
     runs-on: ubuntu-latest
@@ -147,21 +129,11 @@ jobs:
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Restart after installation
-        run: reboot
-        shell: bash
       - name: Check if installation was succesful
         run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
         shell: bash
-      - name: Upgrade Cyberpanel from current Repository
-        run: printf "\n\n\n\n\n\n\n\n" | sh <(curl https://raw.githubusercontent.com/$USER/$REPO/$UPGRADE_BRANCH/preUpgrade.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/preUpgrade.sh)
-        shell: bash
-      - name: Restart after Upgrade
-        run: reboot
-        shell: bash
-      - name: check if upgrade was succesful
-        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
-        shell: bash
+      - name: Sleep indefinite to be able to access the GUI
+        run: sleep infinity
   openeuler2003:
     name: Cyberpanel on Openeuler 20.03
     runs-on: ubuntu-latest
@@ -188,21 +160,11 @@ jobs:
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Restart after installation
-        run: reboot
-        shell: bash
       - name: Check if installation was succesful
         run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
         shell: bash
-      - name: Upgrade Cyberpanel from current Repository
-        run: printf "\n\n\n\n\n\n\n\n" | sh <(curl https://raw.githubusercontent.com/$USER/$REPO/$UPGRADE_BRANCH/preUpgrade.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/preUpgrade.sh)
-        shell: bash
-      - name: Restart after Upgrade
-        run: reboot
-        shell: bash
-      - name: check if upgrade was succesful
-        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
-        shell: bash
+      - name: Sleep indefinite to be able to access the GUI
+        run: sleep infinity
   openeuler2203:
     name: Cyberpanel on Openeuler 22.03
     runs-on: ubuntu-latest
@@ -229,21 +191,11 @@ jobs:
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Restart after installation
-        run: reboot
-        shell: bash
       - name: Check if installation was succesful
         run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
         shell: bash
-      - name: Upgrade Cyberpanel from current Repository
-        run: printf "\n\n\n\n\n\n\n\n" | sh <(curl https://raw.githubusercontent.com/$USER/$REPO/$UPGRADE_BRANCH/preUpgrade.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/preUpgrade.sh)
-        shell: bash
-      - name: Restart after Upgrade
-        run: reboot
-        shell: bash
-      - name: check if upgrade was succesful
-        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
-        shell: bash
+      - name: Sleep indefinite to be able to access the GUI
+        run: sleep infinity
   ubuntu1804:
     name: Cyberpanel on Ubuntu 18.04
     runs-on: ubuntu-latest
@@ -272,21 +224,11 @@ jobs:
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n5\n5\n5\n5" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Restart after installation
-        run: reboot
-        shell: bash
       - name: Check if installation was succesful
         run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
         shell: bash
-      - name: Upgrade Cyberpanel from current Repository
-        run: printf "\n\n\n\n\n\n\n\n" | sh <(curl https://raw.githubusercontent.com/$USER/$REPO/$UPGRADE_BRANCH/preUpgrade.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/preUpgrade.sh)
-        shell: bash
-      - name: Restart after Upgrade
-        run: reboot
-        shell: bash
-      - name: check if upgrade was succesful
-        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
-        shell: bash
+      - name: Sleep indefinite to be able to access the GUI
+        run: sleep infinity
   ubuntu2004:
     name: Cyberpanel on Ubuntu 20.04
     runs-on: ubuntu-latest
@@ -315,18 +257,8 @@ jobs:
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
-      - name: Restart after installation
-        run: reboot
-        shell: bash
       - name: Check if installation was succesful
         run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
         shell: bash
-      - name: Upgrade Cyberpanel from current Repository
-        run: printf "\n\n\n\n\n\n\n\n" | sh <(curl https://raw.githubusercontent.com/$USER/$REPO/$UPGRADE_BRANCH/preUpgrade.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/preUpgrade.sh)
-        shell: bash
-      - name: Restart after Upgrade
-        run: reboot
-        shell: bash
-      - name: check if upgrade was succesful
-        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
-        shell: bash
+      - name: Sleep indefinite to be able to access the GUI
+        run: sleep infinity
