@@ -1,0 +1,142 @@
+name: Test whether Cyberpanel works
+on: push
+
+jobs:
+  centos7:
+    name: Cyberpanel on Centos 7
+    runs-on: ubuntu-latest
+    container:
+      image: centos:centos7
+      env:
+        USER: cyberpanel-dynamic
+        REPO: cyberpanel
+        BRANCH: stable
+        UPGRADE_BRANCH: v2.3.2
+    steps:
+      - name: Install Cyberpanel from current Repository
+        run: bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
+      - name: Restart after installation
+        run: reboot
+      - name: Check if installation was succesful
+        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+      - name: Upgrade Cyberpanel from current Repository
+        run: sh <(curl https://raw.githubusercontent.com/$USER/$REPO/$UPGRADE_BRANCH/preUpgrade.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/preUpgrade.sh)
+      - name: Restart after Upgrade
+        run: reboot
+      - name: check if upgrade was succesful
+        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+  centos8:
+    name: Cyberpanel on Centos 8
+    runs-on: ubuntu-latest
+    container:
+      image: centos:centos8
+      env:
+        USER: cyberpanel-dynamic
+        REPO: cyberpanel
+        BRANCH: stable
+        UPGRADE_BRANCH: v2.3.2
+    steps:
+      - name: Install Cyberpanel from current Repository
+        run: bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
+      - name: Restart after installation
+        run: reboot
+      - name: Check if installation was succesful
+        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+      - name: Upgrade Cyberpanel from current Repository
+        run: sh <(curl https://raw.githubusercontent.com/$USER/$REPO/$UPGRADE_BRANCH/preUpgrade.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/preUpgrade.sh)
+      - name: Restart after Upgrade
+        run: reboot
+      - name: check if upgrade was succesful
+        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+  openeuler2003:
+    name: Cyberpanel on Openeuler 20.03
+    runs-on: ubuntu-latest
+    container:
+      image: openeuler:20.03
+      env:
+        USER: cyberpanel-dynamic
+        REPO: cyberpanel
+        BRANCH: stable
+        UPGRADE_BRANCH: v2.3.2
+    steps:
+      - name: Install Cyberpanel from current Repository
+        run: bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
+      - name: Restart after installation
+        run: reboot
+      - name: Check if installation was succesful
+        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+      - name: Upgrade Cyberpanel from current Repository
+        run: sh <(curl https://raw.githubusercontent.com/$USER/$REPO/$UPGRADE_BRANCH/preUpgrade.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/preUpgrade.sh)
+      - name: Restart after Upgrade
+        run: reboot
+      - name: check if upgrade was succesful
+        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+  openeuler2203:
+    name: Cyberpanel on Openeuler 22.03
+    runs-on: ubuntu-latest
+    container:
+      image: openeuler:22.03
+      env:
+        USER: cyberpanel-dynamic
+        REPO: cyberpanel
+        BRANCH: stable
+        UPGRADE_BRANCH: v2.3.2
+    steps:
+      - name: Install Cyberpanel from current Repository
+        run: bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
+      - name: Restart after installation
+        run: reboot
+      - name: Check if installation was succesful
+        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+      - name: Upgrade Cyberpanel from current Repository
+        run: sh <(curl https://raw.githubusercontent.com/$USER/$REPO/$UPGRADE_BRANCH/preUpgrade.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/preUpgrade.sh)
+      - name: Restart after Upgrade
+        run: reboot
+      - name: check if upgrade was succesful
+        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+  ubuntu1804:
+    name: Cyberpanel on Ubuntu 18.04
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:bionic
+      env:
+        USER: cyberpanel-dynamic
+        REPO: cyberpanel
+        BRANCH: stable
+        UPGRADE_BRANCH: v2.3.2
+    steps:
+      - name: Install Cyberpanel from current Repository
+        run: bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
+      - name: Restart after installation
+        run: reboot
+      - name: Check if installation was succesful
+        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+      - name: Upgrade Cyberpanel from current Repository
+        run: sh <(curl https://raw.githubusercontent.com/$USER/$REPO/$UPGRADE_BRANCH/preUpgrade.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/preUpgrade.sh)
+      - name: Restart after Upgrade
+        run: reboot
+      - name: check if upgrade was succesful
+        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+  ubuntu2004:
+    name: Cyberpanel on Ubuntu 20.04
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:focal
+      env:
+        USER: cyberpanel-dynamic
+        REPO: cyberpanel
+        BRANCH: stable
+        UPGRADE_BRANCH: v2.3.2
+    steps:
+      - name: Install Cyberpanel from current Repository
+        run: bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
+      - name: Restart after installation
+        run: reboot
+      - name: Check if installation was succesful
+        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
+      - name: Upgrade Cyberpanel from current Repository
+        run: sh <(curl https://raw.githubusercontent.com/$USER/$REPO/$UPGRADE_BRANCH/preUpgrade.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/preUpgrade.sh)
+      - name: Restart after Upgrade
+        run: reboot
+      - name: check if upgrade was succesful
+        run: curl -s -o /dev/null -w "%{http_code}" 127.0.0.1:8090
