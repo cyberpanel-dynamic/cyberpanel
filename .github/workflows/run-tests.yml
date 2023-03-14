@@ -42,6 +42,11 @@ jobs:
         BRANCH: stable
         UPGRADE_BRANCH: v2.3.2
     steps:
+      - name: Fix missing mirrorlist (Bug in CentOS 8 Container)
+        run: |
+          cd /etc/yum.repos.d/ 
+          sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+          sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -72,7 +77,9 @@ jobs:
         UPGRADE_BRANCH: v2.3.2
     steps:
       - name: Install wget and curl
-        run: apt update -y && apt install -y wget curl
+        run: |
+          yum update -y
+          yum install wget curl
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -103,7 +110,9 @@ jobs:
         UPGRADE_BRANCH: v2.3.2
     steps:
       - name: Install wget and curl
-        run: apt update -y && apt install -y wget curl
+        run: |
+          yum update -y
+          yum install wget curl
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
