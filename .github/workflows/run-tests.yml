@@ -28,7 +28,7 @@ jobs:
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Keep the container running
-        run: while true; sleep 2; done;
+        run: while true; do sleep 2; done;
         shell: bash
   centos8:
     name: Cyberpanel on Centos 8
@@ -62,14 +62,14 @@ jobs:
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Keep the container running
-        run: while true; sleep 2; done;
+        run: while true; do sleep 2; done;
         shell: bash
   almalinux8:
     name: Cyberpanel on Almalinux 8
     runs-on: ubuntu-latest
     container:
       image: fauust/docker-systemd:almalinux-8
-      options: --user root --privileged
+      options: --user root --sysctl --privileged
       volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup
       env:
@@ -92,7 +92,7 @@ jobs:
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Keep the container running
-        run: while true; sleep 2; done;
+        run: while true; do sleep 2; done;
   rockylinux:
     name: Cyberpanel on Rockylinux
     runs-on: ubuntu-latest
@@ -114,12 +114,12 @@ jobs:
       - name: Install wget, curl and cron
         run: |
           yum update -y
-          yum install crontabs python3 python3-devel -y
+          yum install crontabs python3 python3-devel findutils -y
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Keep the container running
-        run: while true; sleep 2; done;
+        run: while true; do sleep 2; done;
   openeuler2003:
     name: Cyberpanel on Openeuler 20.03
     runs-on: ubuntu-latest
@@ -141,12 +141,12 @@ jobs:
       - name: Install wget, curl and cron
         run: |
           yum update -y
-          yum install wget curl cronie python3 python3-devel -y
+          yum install crontabs python3 python3-devel -y
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Keep the container running
-        run: while true; sleep 2; done;
+        run: while true; do sleep 2; done;
   openeuler2203:
     name: Cyberpanel on Openeuler 22.03
     runs-on: ubuntu-latest
@@ -168,19 +168,19 @@ jobs:
       - name: Install wget, curl and cron
         run: |
           yum update -y
-          yum install wget curl cronie python3 python3-devel -y
+          yum install crontabs python3 python3-devel -y
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Keep the container running
-        run: while true; sleep 2; done;
+        run: while true; do sleep 2; done;
         shell: bash
   ubuntu1804:
     name: Cyberpanel on Ubuntu 18.04
     runs-on: ubuntu-latest
     container:
       image: fauust/docker-systemd:ubuntu-18.04
-      options: --user root --privileged
+      options: --user root --privileged -d
       volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup
       env:
@@ -195,8 +195,8 @@ jobs:
       - name: set home env
         shell: bash
         run: |
-          "echo HOME=/root | tee -a $GITHUB_ENV"
-          "echo DEBIAN_FRONTEND=noninteractive | tee -a $GITHUB_ENV"
+          echo HOME=/root | tee -a $GITHUB_ENV
+          echo DEBIAN_FRONTEND=noninteractive | tee -a $GITHUB_ENV
       - name: Install wget, curl and cron
         run: |
           apt update -y 
@@ -206,14 +206,14 @@ jobs:
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Keep the container running
-        run: while true; sleep 2; done;
+        run: while true; do sleep 2; done;
         shell: bash
   ubuntu2004:
     name: Cyberpanel on Ubuntu 20.04
     runs-on: ubuntu-latest
     container:
       image: fauust/docker-systemd:ubuntu-20.04
-      options: --user root --privileged
+      options: --user root --privileged -d
       volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup
       env:
@@ -236,5 +236,5 @@ jobs:
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
       - name: Keep the container running
-        run: while true; sleep 2; done;
+        run: while true; do sleep 2; done;
         shell: bash
