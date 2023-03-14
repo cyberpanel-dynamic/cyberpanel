@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: centos:centos7
+      ports:
+        - 8090:8090
       options: --user root --sysctl net.ipv4.ip_forward=1
       env:
         USER: cyberpanel-dynamic
@@ -35,6 +37,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: centos:centos8
+      ports:
+        - 8090:8090
       options: --user root --sysctl net.ipv4.ip_forward=1
       env:
         USER: cyberpanel-dynamic
@@ -69,6 +73,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: fauust/docker-systemd:almalinux-8
+      ports:
+        - 8090:8090
       options: --user root --privileged --sysctl net.ipv4.ip_forward=1
       volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup
@@ -87,7 +93,15 @@ jobs:
       - name: Install wget, curl and cron
         run: |
           yum update -y
-          yum install crontabs python3 python3-devel -y
+          yum install crontabs python3 python3-devel systemd -y
+          (cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done);
+          rm -f /lib/systemd/system/multi-user.target.wants/*;
+          rm -f /etc/systemd/system/*.wants/*;
+          rm -f /lib/systemd/system/local-fs.target.wants/*;
+          rm -f /lib/systemd/system/sockets.target.wants/*udev*;
+          rm -f /lib/systemd/system/sockets.target.wants/*initctl*;
+          rm -f /lib/systemd/system/basic.target.wants/*;
+          rm -f /lib/systemd/system/anaconda.target.wants/*;
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -98,6 +112,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: rockylinux:8
+      ports:
+        - 8090:8090
       options: --user root --sysctl net.ipv4.ip_forward=1
       env:
         USER: cyberpanel-dynamic
@@ -123,7 +139,6 @@ jobs:
           rm -f /lib/systemd/system/sockets.target.wants/*initctl*;
           rm -f /lib/systemd/system/basic.target.wants/*;
           rm -f /lib/systemd/system/anaconda.target.wants/*;
-          /usr/sbin/init
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -134,6 +149,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: openeuler/openeuler:20.03
+      ports:
+        - 8090:8090
       options: --user root --sysctl net.ipv4.ip_forward=1
       env:
         USER: cyberpanel-dynamic
@@ -189,6 +206,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: fauust/docker-systemd:ubuntu-18.04
+      ports:
+        - 8090:8090
       options: --user root --privileged --sysctl net.ipv4.ip_forward=1
       volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup
@@ -218,7 +237,6 @@ jobs:
           rm -f /lib/systemd/system/sockets.target.wants/*initctl*;
           rm -f /lib/systemd/system/basic.target.wants/*;
           rm -f /lib/systemd/system/anaconda.target.wants/*;
-          /usr/sbin/init
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
@@ -230,6 +248,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: fauust/docker-systemd:ubuntu-20.04
+      ports:
+        - 8090:8090
       options: --user root --privileged --sysctl net.ipv4.ip_forward=1
       volumes:
         - /sys/fs/cgroup:/sys/fs/cgroup
@@ -257,7 +277,6 @@ jobs:
           rm -f /lib/systemd/system/sockets.target.wants/*initctl*;
           rm -f /lib/systemd/system/basic.target.wants/*;
           rm -f /lib/systemd/system/anaconda.target.wants/*;
-          /usr/sbin/init
       - name: Install Cyberpanel from current Repository
         run: printf "\n1\n1\n\n\n\n\n\n" | bash <(curl https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh || wget -O - https://raw.githubusercontent.com/$USER/$REPO/$BRANCH/install.sh)
         shell: bash
