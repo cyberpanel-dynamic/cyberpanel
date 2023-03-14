@@ -40,6 +40,7 @@ sh <(curl https://cyberpanel.net/install.sh || wget -O - https://cyberpanel.net/
 For your own custom repository (change the BASE_REPO and BASE_REPO_THEMES to your own repo):
 
 Change the file install.sh in the root folder of your github from line 4 to line 15:
+
 ```bash
 echo `
 export GIT_PROVIDER="github.com"
@@ -54,11 +55,12 @@ export GIT_API="https://api.$GIT_PROVIDER/repos/$BASE_REPO"
 export GIT_API_THEMES="https://api.$GIT_PROVIDER/repos/$BASE_REPO_THEMES"
 ` >> /etc/profile.d/cyberpanel_env.sh
 ```
+
 The values you can change are: GIT_PROVIDER, RAW_CONTENT, BASE_REPO, BASE_REPO_THEMES
 
-
 After commiting your changes to the install.sh script, run this command (Replace cyberpanel-dynamic/cyberpanel to your git repo):
-** notice that it changed to bash instead of sh **
+
+** notice that it changed to bash instead of sh due to simbaclaws's lack of competence in the field of bashisms **
 
 ```
 bash <(curl https://raw.githubusercontent.com/cyberpanel-dynamic/cyberpanel/stable/install.sh || wget -O - https://raw.githubusercontent.com/cyberpanel-dynamic/cyberpanel/stable/install.sh)
